@@ -1,15 +1,24 @@
 import React, { Component } from 'react';
 
 class SignedOut extends Component {
-    render() {
-        return (
-            <div>
-                <a href="https://api.instagram.com/oauth/authorize/?client_id=9acb7ddc5f4d47178844c1faf0907acd&redirect_uri=https://localhost:3001/oauth/redirect&response_type=code">
-                    Login with instagram
-                </a>
-            </div>
-        );
-    }
+	render() {
+		return (
+			<div>
+				<h1> Login with instagram </h1>
+				<form
+					action='http://10.1.7.50:3001/posts/createpost'
+					method='post'
+					enctype='multipart/form-data'
+				>
+                
+					<input type='file' name='image' />
+					<input type='text' name='description' />
+					<input type='text' name='user' />
+					<input type='submit' value='submit' />
+				</form>
+			</div>
+		);
+	}
 }
 
 export default SignedOut;
