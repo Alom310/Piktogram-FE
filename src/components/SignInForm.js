@@ -37,7 +37,7 @@ export default class SignInForm extends Component {
           <input type="submit" name="submit" placeholder="submit" />
         </form>
         Don't have an account?
-        <button onClick={this.props.signingUp}>Sign Up</button>
+        <button onClick={this.props.onSignUp}>Sign Up</button>
       </div>
     )
   }
