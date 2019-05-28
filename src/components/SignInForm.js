@@ -36,6 +36,8 @@ export default class SignInForm extends Component {
           <input type="password" name="password" placeholder="Password" onChange={this.handleInput} />
           <input type="submit" name="submit" placeholder="submit" />
         </form>
+        Don't have an account?
+        <button onClick={this.props.signingUp}>Sign Up</button>
       </div>
     )
   }
