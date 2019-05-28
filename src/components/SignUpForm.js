@@ -46,7 +46,7 @@ export default class SignUpForm extends Component {
           <input type="submit" name="submit" placeholder="submit" />
         </form>
         Already have an account?
-        <button onClick={this.props.signingIn}>Sign In</button>
+        <button onClick={this.props.onSignIn}>Sign In</button>
       </div>
     )
   }

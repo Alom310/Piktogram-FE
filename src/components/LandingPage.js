@@ -8,7 +8,7 @@ class LandingPage extends Component {
 
 	state = {
 		isSignedIn: false,
-		signingIn: false
+		displaySignInForm: false
 	}
 
 	componentDidMount() {
@@ -32,15 +32,15 @@ class LandingPage extends Component {
 		}
 	}
 
-	signingIn = () => {
+	onSignIn = () => {
 		this.setState({
-			signingIn: true
+			displaySignInForm: true
 		})
 	}
 
-	signingUp = () => {
+	onSignUp = () => {
 		this.setState({
-			signingIn: false
+			displaySignInForm: false
 		})
 	}
 
@@ -63,16 +63,16 @@ class LandingPage extends Component {
 					<Wrapper signedOut={this.signedOut} />
 				</div>
 			);
-		} else if (this.state.signingIn) {
+		} else if (this.state.displaySignInForm) {
 			return (
 				<SignInForm signedIn={this.signedIn}
-					signingUp={this.signingUp}
+					onSignUp={this.onSignUp}
 				/>
 			)
 		} else {
 			return (
 				<SignUpForm signedIn={this.signedIn}
-					signingIn={this.signingIn}
+					onSignIn={this.onSignIn}
 				/>
 			)
 		}
