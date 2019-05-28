@@ -7,7 +7,8 @@ import SignUpForm from './SignUpForm';
 class LandingPage extends Component {
 
 	state = {
-		isSignedIn: false
+		isSignedIn: false,
+		signingIn: false
 	}
 
 	componentDidMount() {
@@ -31,6 +32,18 @@ class LandingPage extends Component {
 		}
 	}
 
+	signingIn = () => {
+		this.setState({
+			signingIn: true
+		})
+	}
+
+	signingUp = () => {
+		this.setState({
+			signingIn: false
+		})
+	}
+
 	signedIn = () => {
 		this.setState({
 			isSignedIn: true
@@ -50,12 +63,17 @@ class LandingPage extends Component {
 					<Wrapper signedOut={this.signedOut} />
 				</div>
 			);
+		} else if (this.state.signingIn) {
+			return (
+				<SignInForm signedIn={this.signedIn}
+					signingUp={this.signingUp}
+				/>
+			)
 		} else {
 			return (
-				<div>
-					<SignInForm signedIn={this.signedIn} />
-					<SignUpForm signedIn={this.signedIn} />
-				</div>
+				<SignUpForm signedIn={this.signedIn}
+					signingIn={this.signingIn}
+				/>
 			)
 		}
 	}
