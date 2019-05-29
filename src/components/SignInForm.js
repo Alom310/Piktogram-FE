@@ -5,8 +5,8 @@ import './SignInForm.css';
 
 export default class SignInForm extends Component {
 	state = {
-		email    : null,
-		password : null
+		email: null,
+		password: null
 	};
 
 	handleInput = event => {
@@ -19,8 +19,8 @@ export default class SignInForm extends Component {
 		event.preventDefault();
 		axios
 			.post('http://localhost:3001/users/login', {
-				email    : this.state.email,
-				password : this.state.password
+				email: this.state.email,
+				password: this.state.password
 			})
 			.then(res => {
 				localStorage.token = res.data.signedJwt;
@@ -68,9 +68,7 @@ export default class SignInForm extends Component {
 
 					<div className='text-center'>
 						<p>Don't have an account?</p>
-						<a href='#' onClick={this.props.onSignUp}>
-							SignUp
-						</a>
+						<p onClick={this.props.onSignUp}>SignUp</p>
 					</div>
 				</Form>
 			</div>
