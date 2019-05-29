@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-
+import { Form, Button } from 'react-bootstrap';
+import './SignUpForm.css';
 export default class SignUpForm extends Component {
 
   state = {
@@ -37,7 +38,7 @@ export default class SignUpForm extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSignUp}>
+        {/* <form onSubmit={this.handleSignUp}>
           <input name="firstName" placeholder="First Name" onChange={this.handleInput} />
           <input name="lastName" placeholder="Last Name" onChange={this.handleInput} />
           <input name="email" placeholder="Email" onChange={this.handleInput} />
@@ -46,7 +47,52 @@ export default class SignUpForm extends Component {
           <input type="submit" name="submit" placeholder="submit" />
         </form>
         Already have an account?
-        <button onClick={this.props.onSignIn}>Sign In</button>
+        <button onClick={this.props.onSignIn}>Sign In</button> */}
+        <div className="d-flex flex-column align-items-center">
+          <Form className="form"> 
+            <Form.Group controlId="">
+              <Form.Label>First Name</Form.Label>
+              <Form.Control type="text" placeholder="Enter first name" />
+            </Form.Group>
+
+            <Form.Group controlId="">
+              <Form.Label>Last Name</Form.Label>
+              <Form.Control type="text" placeholder="Enter last name" />
+            </Form.Group>
+
+            <Form.Group controlId="">
+              <Form.Label>Username</Form.Label>
+              <Form.Control type="text" placeholder="Enter username" />
+            </Form.Group>
+
+            <Form.Group controlId="formBasicEmail">
+              <Form.Label>Email address</Form.Label>
+              <Form.Control type="email" placeholder="Enter email" />
+              <Form.Text className="text-muted">
+                We'll never share your email with anyone else.
+              </Form.Text>
+            </Form.Group>
+
+            <Form.Group controlId="formBasicPassword">
+              <Form.Label>Password</Form.Label>
+              <Form.Control type="password" placeholder="Password" />
+            </Form.Group>
+            <Form.Group controlId="formBasicChecbox">
+              <Form.Check type="checkbox" label="I agree to the terms and conditions..." />
+            </Form.Group>
+            <div className="text-center">
+              <Button variant="primary" type="submit">
+                Submit
+              </Button>
+            </div>
+
+          </Form>          
+        </div>
+
+        <div className="text-center">
+          Already have an account?<a onClick={this.props.onSignIn}> Sign In</a>
+        </div>
+
       </div>
     )
   }
