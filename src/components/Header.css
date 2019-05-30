@@ -1,5 +1,6 @@
 header{
     background-color: #00F8FF;
+    display: none;
 }
 
 h3{
@@ -9,4 +10,11 @@ h3{
 img{
     width:30px;
     height:30px;
+}
+
+@media only screen and (max-width: 400px){
+    header{
+        display: block;
+    }
+
 }

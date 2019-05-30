@@ -93,11 +93,7 @@ export default class SignUpForm extends Component {
         </div>
 
         <div className="text-center">
-<<<<<<< HEAD
           Already have an account?<a href='#' onClick={this.props.onSignIn}> Sign In</a>
-=======
-          Already have an account?<p onClick={this.props.onSignIn}>Sign In</p>
->>>>>>> abb16673a229124c79f7cd4dcd39dca71e9e5d3d
         </div>
 
       </div>
