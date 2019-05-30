@@ -49,7 +49,10 @@ export default class SignUpForm extends Component {
         Already have an account?
         <button onClick={this.props.onSignIn}>Sign In</button> */}
         <div className="d-flex flex-column align-items-center">
-          <Form className="form"> 
+          <Form className='form'
+            onSubmit={this.handleSignUp}
+            autocomplete='off'>
+
             <Form.Group controlId="">
               <Form.Label>First Name</Form.Label>
               <Form.Control type="text" placeholder="Enter first name" />
@@ -86,11 +89,15 @@ export default class SignUpForm extends Component {
               </Button>
             </div>
 
-          </Form>          
+          </Form>
         </div>
 
         <div className="text-center">
+<<<<<<< HEAD
           Already have an account?<a href='#' onClick={this.props.onSignIn}> Sign In</a>
+=======
+          Already have an account?<p onClick={this.props.onSignIn}>Sign In</p>
+>>>>>>> abb16673a229124c79f7cd4dcd39dca71e9e5d3d
         </div>
 
       </div>
