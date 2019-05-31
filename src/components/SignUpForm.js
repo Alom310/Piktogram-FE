@@ -9,25 +9,38 @@ export default class SignUpForm extends Component {
     lastName: null,
     email: null,
     username: null,
-    password: null
+    password: null,
+    avatar: null,
+    bio: null
   }
 
   handleInput = event => {
+    if (event.target.name === "image") {
+      this.setState({
+        avatar: event.target.files[0]
+      })
+    } else {
     this.setState({
       [event.target.name]: event.target.value,
     });
+    }
   };
 
   handleSignUp = event => {
-    event.preventDefault();
-    axios
-      .post("http://localhost:3001/users/signup", {
-        firstName: this.state.firstName,
-        lastName: this.state.lastName,
-        email: this.state.email,
-        username: this.state.username,
-        password: this.state.password
-      })
+    let formData = new FormData();
+    formData.append("image", this.state.avatar);
+    formData.append("firstName", this.state.firstName);
+    formData.append("lastName", this.state.lastName);
+    formData.append("email", this.state.email);
+    formData.append("username", this.state.username);
+    formData.append("password", this.state.password);
+    formData.append("bio", this.state.bio);
+    axios({
+      method: "POST",
+      url: `http://localhost:3001/users/signup`,
+      headers: { token: localStorage.token },
+      data: formData
+    })
       .then(response => {
         localStorage.token = response.data.signedJwt;
         this.props.signedIn();
@@ -70,6 +83,17 @@ export default class SignUpForm extends Component {
               <Form.Label>Password</Form.Label>
               <Form.Control type="password" name='password' placeholder="Password" onChange={this.handleInput} />
             </Form.Group>
+
+            <Form.Group controlId="">
+              <Form.Label>Bio</Form.Label>
+              <Form.Control type="text" name='bio' placeholder="Enter bio" onChange={this.handleInput} />
+            </Form.Group>
+
+            <Form.Group controlId="">
+              <Form.Label>Avatar</Form.Label>
+              <Form.Control type='file' name='image' placeholder="Choose your profile image" onChange={this.handleInput} />
+            </Form.Group>
+
             <Form.Group controlId="formBasicChecbox">
               <Form.Check type="checkbox" label="I agree to the terms and conditions..." />
             </Form.Group>
