@@ -11,7 +11,7 @@ function AppRouter() {
   return (
     <Router>
       <div>
-        <nav>
+        {/* <nav>
           <ul>
             <li>
               <Link to="/">Home</Link>
@@ -29,7 +29,7 @@ function AppRouter() {
               <Link to="/profile/">Profile</Link>
             </li>
           </ul>
-        </nav>
+        </nav> */}
 
         <Route path="/" exact component={Home} />
         <Route path="/search/" component={SearchBar} />

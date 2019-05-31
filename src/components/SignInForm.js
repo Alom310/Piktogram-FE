@@ -68,7 +68,7 @@ export default class SignInForm extends Component {
 
 					<div className='text-center'>
 						<p>Don't have an account?</p>
-						<p onClick={this.props.onSignUp}>SignUp</p>
+						<p className="link" onClick={this.props.onSignUp}>SignUp</p>
 					</div>
 				</Form>
 			</div>

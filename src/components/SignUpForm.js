@@ -38,16 +38,6 @@ export default class SignUpForm extends Component {
   render() {
     return (
       <div>
-        {/* <form onSubmit={this.handleSignUp}>
-          <input name="firstName" placeholder="First Name" onChange={this.handleInput} />
-          <input name="lastName" placeholder="Last Name" onChange={this.handleInput} />
-          <input name="email" placeholder="Email" onChange={this.handleInput} />
-          <input name="username" placeholder="Username" onChange={this.handleInput} />
-          <input type="password" name="password" placeholder="Password" onChange={this.handleInput} />
-          <input type="submit" name="submit" placeholder="submit" />
-        </form>
-        Already have an account?
-        <button onClick={this.props.onSignIn}>Sign In</button> */}
         <div className="d-flex flex-column align-items-center">
           <Form className='signUpForm'
             onSubmit={this.handleSignUp}
@@ -55,22 +45,22 @@ export default class SignUpForm extends Component {
 
             <Form.Group controlId="">
               <Form.Label>First Name</Form.Label>
-              <Form.Control type="text" placeholder="Enter first name" />
+              <Form.Control type="text" name='firstName' placeholder="Enter first name" onChange={this.handleInput} />
             </Form.Group>
 
             <Form.Group controlId="">
               <Form.Label>Last Name</Form.Label>
-              <Form.Control type="text" placeholder="Enter last name" />
+              <Form.Control type="text" name='lastName' placeholder="Enter last name" onChange={this.handleInput} />
             </Form.Group>
 
             <Form.Group controlId="">
               <Form.Label>Username</Form.Label>
-              <Form.Control type="text" placeholder="Enter username" />
+              <Form.Control type="text" name='username' placeholder="Enter username" onChange={this.handleInput} />
             </Form.Group>
 
             <Form.Group controlId="formBasicEmail">
               <Form.Label>Email address</Form.Label>
-              <Form.Control type="email" placeholder="Enter email" />
+              <Form.Control type="email" name='email' placeholder="Enter email" onChange={this.handleInput} />
               <Form.Text className="text-muted">
                 We'll never share your email with anyone else.
               </Form.Text>
@@ -78,7 +68,7 @@ export default class SignUpForm extends Component {
 
             <Form.Group controlId="formBasicPassword">
               <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="Password" />
+              <Form.Control type="password" name='password' placeholder="Password" onChange={this.handleInput} />
             </Form.Group>
             <Form.Group controlId="formBasicChecbox">
               <Form.Check type="checkbox" label="I agree to the terms and conditions..." />
@@ -93,7 +83,7 @@ export default class SignUpForm extends Component {
         </div>
 
         <div className="text-center">
-          Already have an account?<a href='#' onClick={this.props.onSignIn}> Sign In</a>
+          Already have an account?<p className="link" onClick={this.props.onSignIn}> Sign In</p>
         </div>
 
       </div>
