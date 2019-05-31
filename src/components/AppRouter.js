@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import SelectedProfile from './SelectedProfile';
 
 import Home from './Home';
 import SearchBar from './SearchBar';
@@ -26,7 +27,7 @@ function AppRouter() {
               <Link to="/notifications/">Notifications</Link>
             </li>
             <li>
-              <Link to="/profile/">Profile</Link>
+              <Link to="/myprofile/">Profile</Link>
             </li>
           </ul>
         </nav>
@@ -35,7 +36,8 @@ function AppRouter() {
         <Route path="/search/" component={SearchBar} />
         <Route path="/newpost/" component={NewPost} />
         <Route path="/notifications/" component={Notifications} />
-        <Route path="/profile/" component={Profile} />
+        <Route path="/myprofile/" component={Profile} />
+        <Route path="/profile/" component={SelectedProfile} />
       </div>
     </Router>
   );
