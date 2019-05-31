@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Form, Button } from 'react-bootstrap';
-import './SignUpForm.css';
+import '../styles/SignUpForm.css';
 export default class SignUpForm extends Component {
 
   state = {
@@ -49,7 +49,7 @@ export default class SignUpForm extends Component {
         Already have an account?
         <button onClick={this.props.onSignIn}>Sign In</button> */}
         <div className="d-flex flex-column align-items-center">
-          <Form className='form'
+          <Form className='signUpForm'
             onSubmit={this.handleSignUp}
             autocomplete='off'>
 

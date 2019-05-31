@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Form, Button } from 'react-bootstrap';
-import './SignInForm.css';
+import '../styles/SignInForm.css';
 
 export default class SignInForm extends Component {
 	state = {
@@ -33,7 +33,7 @@ export default class SignInForm extends Component {
 		return (
 			<div className='d-flex flex-direction-row justify-content-center '>
 				<Form
-					className='form'
+					className='signInForm'
 					onSubmit={this.handleSignIn}
 					autocomplete='off'
 				>
