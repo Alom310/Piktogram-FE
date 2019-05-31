@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import SelectedProfile from './SelectedProfile';
 
+import SelectedProfile from './SelectedProfile';
 import Home from './Home';
 import SearchBar from './SearchBar';
 import NewPost from './NewPost';
