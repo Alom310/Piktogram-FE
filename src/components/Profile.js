@@ -1,66 +1,72 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import EditProfile from './EditProfile';
+import { Button } from 'react-bootstrap';
 
 export default class Profile extends Component {
+	state = {
+		user  : null,
+		posts : []
+	};
 
-  state = {
-    user: null,
-    posts: [],
-    editProfile: false
-  }
+	handleSignOut = () => {
+		localStorage.clear();
+		window.location.href = '/';
+	};
 
-  getUser = () => {
-    if (localStorage.token) {
-      axios({
-        method: "GET",
-        url: `http://localhost:3001/users/myprofile`,
-        headers: { token: localStorage.token }
-      })
-        .then(response => {
-          this.setState({
-            user: response.data
-          })
-          console.log('App successfully recieves a response', response)
-        })
-        .catch(err => console.log(err))
-    }
-  }
+	getUser = () => {
+		if (localStorage.token) {
+			axios({
+				method  : 'GET',
+				url     : `http://localhost:3001/users/myprofile`,
+				headers : { token: localStorage.token }
+			})
+				.then(response => {
+					this.setState({
+						user : response.data
+					});
+					console.log(
+						'App successfully recieves a response',
+						response
+					);
+				})
+				.catch(err => console.log(err));
+		}
+	};
 
-  fetchPosts = () => {
-    fetch("http://localhost:3001/posts", {
-      method: "GET"
-    })
-      .then(results => results.json())
-      .then(data => this.setState({ posts: data }))
-      .catch(function (error) { console.log(error) });
-  }
+	fetchPosts = () => {
+		fetch('http://localhost:3001/posts', {
+			method : 'GET'
+		})
+			.then(results => results.json())
+			.then(data => this.setState({ posts: data }))
+			.catch(function(error) {
+				console.log(error);
+			});
+	};
 
-  _renderPosts = (post, index) => {
-    if (post.user === this.state.user._id) {
-      let image = `http://localhost:3001/resources/images/${post.fileName}`
+	_renderPosts = (post, index) => {
+		if (post.user === this.state.user._id) {
+			let image = `http://localhost:3001/resources/images/${post.fileName}`;
 
-      return (
-        <div key={index}>
-          <h3>{post.description}</h3>
-          <img src={image} alt="" />
-        </div>
-      )
-    } else {
-      return null;
-    }
-  }
+			return (
+				<div key={index}>
+					<h3>{post.description}</h3>
+					<img src={image} alt='' />
+				</div>
+			);
+		} else {
+			return null;
+		}
+	};
 
-  componentDidMount = () => {
-    this.getUser();
-    this.fetchPosts();
-  }
+	componentDidMount = () => {
+		this.getUser();
+		this.fetchPosts();
+	};
 
-  setEdit = () => {
-    this.setState({
-      editProfile: true
-    })
-  }
+	render() {
+		const { posts } = this.state;
+
 
   returnToProfile = () => {
     this.setState({
