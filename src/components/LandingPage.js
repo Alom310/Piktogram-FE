@@ -4,7 +4,7 @@ import axios from 'axios';
 import SignInForm from './SignInForm';
 import SignUpForm from './SignUpForm';
 import Header from './Header';
-
+// import 'font-awesome/css/font-awesome.min.css';
 class LandingPage extends Component {
 
 	state = {

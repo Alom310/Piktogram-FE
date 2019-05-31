@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Form, Button } from 'react-bootstrap';
-import './SignUpForm.css';
+import '../styles/SignUpForm.css';
 export default class SignUpForm extends Component {
 	state = {
 		firstName : null,
@@ -34,56 +34,67 @@ export default class SignUpForm extends Component {
 			.catch(err => console.log(err));
 	};
 
+	handleSignUp = event => {
+		event.preventDefault();
+		axios
+			.post('http://localhost:3001/users/signup', {
+				firstName : this.state.firstName,
+				lastName  : this.state.lastName,
+				email     : this.state.email,
+				username  : this.state.username,
+				password  : this.state.password
+			})
+			.then(response => {
+				localStorage.token = response.data.signedJwt;
+				this.props.signedIn();
+			})
+			.catch(err => console.log(err));
+	};
+
 	render() {
 		return (
 			<div>
-				{/* <form onSubmit={this.handleSignUp}>
-          <input name="firstName" placeholder="First Name" onChange={this.handleInput} />
-          <input name="lastName" placeholder="Last Name" onChange={this.handleInput} />
-          <input name="email" placeholder="Email" onChange={this.handleInput} />
-          <input name="username" placeholder="Username" onChange={this.handleInput} />
-          <input type="password" name="password" placeholder="Password" onChange={this.handleInput} />
-          <input type="submit" name="submit" placeholder="submit" />
-        </form>
-        Already have an account?
-        <button onClick={this.props.onSignIn}>Sign In</button> */}
 				<div className='d-flex flex-column align-items-center'>
-					<Form className='form' onSubmit={this.handleSignUp}>
-						<Form.Group controlId='firstname'>
+					<Form
+						className='signUpForm'
+						onSubmit={this.handleSignUp}
+						autoComplete='off'
+					>
+						<Form.Group controlId=''>
 							<Form.Label>First Name</Form.Label>
 							<Form.Control
-								name='firstName'
 								type='text'
+								name='firstName'
 								placeholder='Enter first name'
 								onChange={this.handleInput}
 							/>
 						</Form.Group>
 
-						<Form.Group controlId='lastname'>
+						<Form.Group controlId=''>
 							<Form.Label>Last Name</Form.Label>
 							<Form.Control
-								name='lastName'
 								type='text'
+								name='lastName'
 								placeholder='Enter last name'
 								onChange={this.handleInput}
 							/>
 						</Form.Group>
 
-						<Form.Group controlId='username'>
+						<Form.Group controlId=''>
 							<Form.Label>Username</Form.Label>
 							<Form.Control
-								name='username'
 								type='text'
+								name='username'
 								placeholder='Enter username'
 								onChange={this.handleInput}
 							/>
 						</Form.Group>
 
-						<Form.Group controlId='email'>
+						<Form.Group controlId='formBasicEmail'>
 							<Form.Label>Email address</Form.Label>
 							<Form.Control
-								name='email'
 								type='email'
+								name='email'
 								placeholder='Enter email'
 								onChange={this.handleInput}
 							/>
@@ -92,11 +103,11 @@ export default class SignUpForm extends Component {
 							</Form.Text>
 						</Form.Group>
 
-						<Form.Group controlId='password'>
+						<Form.Group controlId='formBasicPassword'>
 							<Form.Label>Password</Form.Label>
 							<Form.Control
-								name='password'
 								type='password'
+								name='password'
 								placeholder='Password'
 								onChange={this.handleInput}
 							/>
@@ -116,7 +127,13 @@ export default class SignUpForm extends Component {
 				</div>
 
 				<div className='text-center'>
-					Already have an account?<p onClick={this.props.onSignIn}>Sign In</p>
+					Already have an account?<p
+						className='link'
+						onClick={this.props.onSignIn}
+					>
+						{' '}
+						Sign In
+					</p>
 				</div>
 			</div>
 		);

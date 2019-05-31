@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Button } from 'react-bootstrap';
 
 export default class Profile extends Component {
 	state = {
 		user  : null,
 		posts : []
+	};
+
+	handleSignOut = () => {
+		localStorage.clear();
+		window.location.href = '/';
 	};
 
 	getUser = () => {
@@ -65,6 +71,7 @@ export default class Profile extends Component {
 			return (
 				<div>
 					<h2>Posts</h2>
+					<Button onClick={this.handleSignOut}>Logout</Button>
 					{posts ? posts.map(this._renderPosts) : 'No posts yet...'}
 				</div>
 			);

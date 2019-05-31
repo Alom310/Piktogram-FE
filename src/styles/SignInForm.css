@@ -4,3 +4,10 @@
     padding:30px;
 }
 
+.link{
+    color: blue;
+}
+
+.link:hover{
+    color: black;
+}
