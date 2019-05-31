@@ -67,6 +67,7 @@ export default class Profile extends Component {
               :
               "No posts yet..."
           }
+
         </div>
       )
     } else {

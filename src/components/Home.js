@@ -1,5 +1,4 @@
-import React, { Component } from 'react'
-
+import React, { Component } from 'react';
 export default class Home extends Component {
 
   state = {
@@ -23,9 +22,10 @@ export default class Home extends Component {
     let image = `http://localhost:3001/resources/images/${post.fileName}`
 
     return (
-      <div key={index}>
-        <h3>{post.description}</h3>
+      <div key={index} className="postCard">
+        <h4>{post.user}</h4>
         <img src={image} alt="" />
+        <h4>{post.description}</h4>
       </div>
     )
   }
