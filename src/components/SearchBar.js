@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import SelectedProfile from './SelectedProfile';
 
 export default class SearchBar extends Component {
 
   state = {
     query: null,
     users: [],
-    selectedUser: null
+    selectedUser: null,
+    renderProfile: false
   }
 
   fetchUsers = (e) => {
@@ -20,9 +23,9 @@ export default class SearchBar extends Component {
 
   _renderUsers = (user, index) => {
     return (
-      <div key={index}>
-        <h3 onClick={() => { this.handleClick(user) }}>{user.username}</h3>
-      </div>
+      <Router key={index}>
+        <Link to="/profile/"><h3 onClick={() => { this.handleClick(user) }}>{user.username}</h3></Link>
+      </Router>
     )
   }
 
@@ -34,13 +37,29 @@ export default class SearchBar extends Component {
 
   handleClick(user) {
     this.setState({
-      selectedUser: user
+      selectedUser: user,
+      renderProfile: true
+    })
+  }
+
+  clearProfile = () => {
+    this.setState({
+      renderProfile: false,
+      query: null,
+      users: []
     })
   }
 
   render() {
 
     const users = this.state.users;
+
+    if (this.state.renderProfile) {
+      return (
+        <SelectedProfile selectedUser={this.state.selectedUser}
+          clearProfile={this.clearProfile} />
+      )
+    }
 
     return (
       <div>
@@ -54,6 +73,7 @@ export default class SearchBar extends Component {
             :
             "No users..."
         }
+
       </div>
     )
 
