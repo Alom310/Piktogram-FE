@@ -67,16 +67,43 @@ export default class Profile extends Component {
 	render() {
 		const { posts } = this.state;
 
-		if (this.state.user) {
-			return (
-				<div>
-					<h2>Posts</h2>
-					<Button onClick={this.handleSignOut}>Logout</Button>
-					{posts ? posts.map(this._renderPosts) : 'No posts yet...'}
-				</div>
-			);
-		} else {
-			return null;
-		}
-	}
+
+  returnToProfile = () => {
+    this.setState({
+      editProfile: false
+    })
+    this.getUser();
+  }
+
+  render() {
+    const { posts } = this.state;
+    // let profileImage = `http://localhost:3001/resources/images/${this.state.user.avatar}`
+
+    if (this.state.editProfile) {
+      return <EditProfile
+        user={this.state.user}
+        returnToProfile={this.returnToProfile}
+      />
+    } else if (this.state.user) {
+      let profileImage = `http://localhost:3001/resources/images/${this.state.user.avatar}`
+      return (
+        <div>
+          <h3>{this.state.user.firstName}</h3>
+          <h3>{this.state.user.lastName}</h3>
+          <h3>{this.state.user.username}</h3>
+          <h3>{this.state.user.bio}</h3>
+          <img src={profileImage} />
+          <button onClick={this.setEdit}>Edit Profile</button>
+          {
+            posts ?
+              posts.map(this._renderPosts)
+              :
+              "No posts yet..."
+          }
+        </div>
+      )
+    } else {
+      return null
+    }
+  }
 }
