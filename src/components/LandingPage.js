@@ -3,6 +3,7 @@ import Wrapper from './Wrapper';
 import axios from 'axios';
 import SignInForm from './SignInForm';
 import SignUpForm from './SignUpForm';
+import Header from './Header';
 
 class LandingPage extends Component {
 
@@ -60,20 +61,27 @@ class LandingPage extends Component {
 		if (this.state.isSignedIn) {
 			return (
 				<div>
+					<Header />
 					<Wrapper signedOut={this.signedOut} />
 				</div>
 			);
 		} else if (this.state.displaySignInForm) {
 			return (
-				<SignInForm signedIn={this.signedIn}
-					onSignUp={this.onSignUp}
-				/>
+				<div>
+					<Header />
+					<SignInForm signedIn={this.signedIn}
+						onSignUp={this.onSignUp}
+					/>
+				</div>
 			)
 		} else {
 			return (
-				<SignUpForm signedIn={this.signedIn}
-					onSignIn={this.onSignIn}
-				/>
+				<div>
+					<Header />
+					<SignUpForm signedIn={this.signedIn}
+						onSignIn={this.onSignIn}
+					/>
+				</div>
 			)
 		}
 	}
