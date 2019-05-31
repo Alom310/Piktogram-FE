@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import logo from '../styles/piktogram.png'
 
 import SelectedProfile from './SelectedProfile';
 import Home from './Home';
@@ -12,8 +13,13 @@ function AppRouter() {
   return (
     <Router>
       <div>
-        {/* <nav>
-          <ul>
+      <header className="d-flex flex-row justify-content-between">
+      <div className="d-flex ">
+            <img id="logoImg" src={logo} className="mr-1"/>
+            <h3>Piktogram</h3>
+            </div>
+        <nav>
+          <ul className="d-flex flex-row justify-content-around">
             <li>
               <Link to="/">Home</Link>
             </li>
@@ -30,7 +36,8 @@ function AppRouter() {
               <Link to="/myprofile/">Profile</Link>
             </li>
           </ul>
-        </nav> */}
+        </nav>
+        </header>
 
         <Route path="/" exact component={Home} />
         <Route path="/search/" component={SearchBar} />
