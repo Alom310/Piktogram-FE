@@ -35,7 +35,7 @@ export default class SignInForm extends Component {
 				<Form
 					className='form'
 					onSubmit={this.handleSignIn}
-					autocomplete='off'
+					autoComplete='on'
 				>
 					<Form.Group controlId='formBasicEmail'>
 						<Form.Label>Email address</Form.Label>

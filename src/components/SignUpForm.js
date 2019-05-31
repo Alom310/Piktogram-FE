@@ -51,7 +51,7 @@ export default class SignUpForm extends Component {
         <div className="d-flex flex-column align-items-center">
           <Form className='form'
             onSubmit={this.handleSignUp}
-            autocomplete='off'>
+            autoComplete='off'>
 
             <Form.Group controlId="">
               <Form.Label>First Name</Form.Label>

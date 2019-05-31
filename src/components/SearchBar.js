@@ -4,7 +4,8 @@ export default class SearchBar extends Component {
 
   state = {
     query: null,
-    users: []
+    users: [],
+    selectedUser: null
   }
 
   fetchUsers = (e) => {
@@ -20,7 +21,7 @@ export default class SearchBar extends Component {
   _renderUsers = (user, index) => {
     return (
       <div key={index}>
-        <h3>{user.username}</h3>
+        <h3 onClick={() => { this.handleClick(user) }}>{user.username}</h3>
       </div>
     )
   }
@@ -31,24 +32,20 @@ export default class SearchBar extends Component {
     });
   };
 
-
+  handleClick(user) {
+    this.setState({
+      selectedUser: user
+    })
+  }
 
   render() {
 
     const users = this.state.users;
 
-    // const resultsMarkup = this.state.users.map((result, key) => {
-    //   return (
-    //     <div key={key}>
-    //     {result.username}
-    //     </div>
-    //   )
-    // })
-
     return (
       <div>
         <form onSubmit={this.fetchUsers}>
-        <input name="query" className="search-bar" placeholder="Search..." onChange={this.handleInput}/>
+          <input name="query" className="search-bar" placeholder="Search..." onChange={this.handleInput} />
         </form>
         <h2>Users</h2>
         {
