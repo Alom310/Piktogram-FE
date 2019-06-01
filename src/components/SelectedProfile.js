@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
-
+import axios from 'axios';
 export default class SelectedProfile extends Component {
 
   state = {
-    posts: []
+    posts: [],
+    user: null,
+    // followers: [],
+    // following: []
   }
 
   componentWillReceiveProps() {
@@ -12,6 +15,31 @@ export default class SelectedProfile extends Component {
 
   componentDidMount = () => {
     this.fetchPosts();
+    this.getUser();
+  }
+
+  // setFollowers = () => {
+  //   this.setState({
+  //     followers: this.props.selectedUser.followers.push(this.state.user._id),
+  //     following: this.state.user.following.push(this.props.selectedUser._id)
+  //   })
+  // }
+
+  getUser = () => {
+    if (localStorage.token) {
+      axios({
+        method: "GET",
+        url: `http://localhost:3001/users/myprofile`,
+        headers: { token: localStorage.token }
+      })
+        .then(response => {
+          this.setState({
+            user: response.data
+          })
+          console.log('App successfully recieves a response', response)
+        })
+        .catch(err => console.log(err))
+    }
   }
 
   fetchPosts = () => {
@@ -37,6 +65,36 @@ export default class SelectedProfile extends Component {
     }
   }
 
+  // push current user id to selected user's followers array
+  // push selcted user id to current user's following array
+
+  // followUser = event => {
+
+  //   // let followersArr = this.props.selectedUser.followers;
+  //   // let followingArr = this.state.user.following;
+  //   this.setFollowers();
+  //   axios
+  //     .put(`http://localhost:3001/users/${this.props.selectedUser._id}/follow`, {
+  //       followers: this.state.followers
+  //     })
+  //     .then(res => {
+  //       console.log(res);
+  //     })
+  //     .catch(err => {
+  //       console.log("Error");
+  //     })
+  //   axios
+  //     .put(`http://localhost:3001/users/${this.state.user._id}/follow`, {
+  //       following: this.state.following
+  //     })
+  //     .then(res => {
+  //       console.log(res);
+  //     })
+  //     .catch(err => {
+  //       console.log("Error");
+  //     })
+  // };
+
   render() {
     const { posts } = this.state;
 
@@ -44,6 +102,7 @@ export default class SelectedProfile extends Component {
       return (
         <div>
           <h2>Posts</h2>
+          <button onClick={this.followUser}>Follow</button>
           {
             posts ?
               posts.map(this._renderPosts)

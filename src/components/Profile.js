@@ -69,9 +69,13 @@ export default class Profile extends Component {
     this.getUser();
   }
 
+  handleSignOut = () => {
+    localStorage.clear();
+    window.location.href = "/"
+  };
+
   render() {
     const { posts } = this.state;
-    // let profileImage = `http://localhost:3001/resources/images/${this.state.user.avatar}`
 
     if (this.state.editProfile) {
       return <EditProfile
@@ -82,11 +86,12 @@ export default class Profile extends Component {
       let profileImage = `http://localhost:3001/resources/images/${this.state.user.avatar}`
       return (
         <div>
+          <button onClick={this.handleSignOut}>Log Out</button>
           <h3>{this.state.user.firstName}</h3>
           <h3>{this.state.user.lastName}</h3>
           <h3>{this.state.user.username}</h3>
           <h3>{this.state.user.bio}</h3>
-          <img src={profileImage} />
+          <img src={profileImage} alt="profile" />
           <button onClick={this.setEdit}>Edit Profile</button>
           {
             posts ?
