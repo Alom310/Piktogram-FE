@@ -16,7 +16,7 @@ export default class Wrapper extends Component {
   render() {
     return (
       <div>
-        {/* <button onClick={this.handleSignOut}>Log Out</button> */}
+        {/* <button onClick={this.handleSignOut}>Log Out</button>  */}
         <AppRouter />
       </div>
     )

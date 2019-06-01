@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import EditProfile from './EditProfile';
 
 export default class Profile extends Component {
 
   state = {
     user: null,
-    posts: []
+    posts: [],
+    editProfile: false
   }
 
   getUser = () => {
@@ -54,24 +56,48 @@ export default class Profile extends Component {
     this.fetchPosts();
   }
 
+  setEdit = () => {
+    this.setState({
+      editProfile: true
+    })
+  }
+
+  returnToProfile = () => {
+    this.setState({
+      editProfile: false
+    })
+    this.getUser();
+  }
+
   render() {
     const { posts } = this.state;
+    // let profileImage = `http://localhost:3001/resources/images/${this.state.user.avatar}`
 
-    if (this.state.user) {
+    if (this.state.editProfile) {
+      return <EditProfile
+        user={this.state.user}
+        returnToProfile={this.returnToProfile}
+      />
+    } else if (this.state.user) {
+      let profileImage = `http://localhost:3001/resources/images/${this.state.user.avatar}`
       return (
         <div>
-          <h2>Posts</h2>
+          <h3>{this.state.user.firstName}</h3>
+          <h3>{this.state.user.lastName}</h3>
+          <h3>{this.state.user.username}</h3>
+          <h3>{this.state.user.bio}</h3>
+          <img src={profileImage} />
+          <button onClick={this.setEdit}>Edit Profile</button>
           {
             posts ?
               posts.map(this._renderPosts)
               :
               "No posts yet..."
           }
-
         </div>
       )
     } else {
-      return null;
+      return null
     }
   }
 }
