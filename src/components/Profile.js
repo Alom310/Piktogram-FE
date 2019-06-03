@@ -69,6 +69,16 @@ export default class Profile extends Component {
     this.getUser();
   }
 
+  handleSignOut = () => {
+    this.setState({
+      email: null,
+      password: null,
+    });
+    this.props.signedOut()
+    localStorage.clear();
+    window.location.href = "/"
+  }
+
   render() {
     const { posts } = this.state;
     // let profileImage = `http://localhost:3001/resources/images/${this.state.user.avatar}`
@@ -94,6 +104,7 @@ export default class Profile extends Component {
               :
               "No posts yet..."
           }
+          <button onClick={this.handleSignOut}>Log Out</button> 
         </div>
       )
     } else {
