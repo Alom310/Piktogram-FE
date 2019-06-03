@@ -68,32 +68,51 @@ export default class SelectedProfile extends Component {
   // push current user id to selected user's followers array
   // push selcted user id to current user's following array
 
-  // followUser = event => {
+  getUser = () => {
+    if (localStorage.token) {
+      axios({
+        method: "GET",
+        url: `http://localhost:3001/users/myprofile`,
+        headers: { token: localStorage.token }
+      })
+        .then(response => {
+          this.setState({
+            user: response.data
+          })
+          console.log('App successfully recieves a response', response)
+        })
+        .catch(err => console.log(err))
+    }
+  }
 
-  //   // let followersArr = this.props.selectedUser.followers;
-  //   // let followingArr = this.state.user.following;
-  //   this.setFollowers();
-  //   axios
-  //     .put(`http://localhost:3001/users/${this.props.selectedUser._id}/follow`, {
-  //       followers: this.state.followers
-  //     })
-  //     .then(res => {
-  //       console.log(res);
-  //     })
-  //     .catch(err => {
-  //       console.log("Error");
-  //     })
-  //   axios
-  //     .put(`http://localhost:3001/users/${this.state.user._id}/follow`, {
-  //       following: this.state.following
-  //     })
-  //     .then(res => {
-  //       console.log(res);
-  //     })
-  //     .catch(err => {
-  //       console.log("Error");
-  //     })
-  // };
+  followUser = event => {
+
+    // let followersArr = this.props.selectedUser.followers;
+    // let followingArr = this.state.user.following;
+    // this.setFollowers();
+    axios({
+      method: "PUT",
+      url: `http://localhost:3001/users/${this.props.selectedUser._id}/follow`,
+      headers: { token: localStorage.token }
+    })
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log("Error");
+      })
+    // axios({
+    //   method: "PUT",
+    //   url: `http://localhost:3001/users/${this.state.user._id}/follow`,
+    //   headers: { token: localStorage.token }
+    // })
+    //   .then(res => {
+    //     console.log(res);
+    //   })
+    //   .catch(err => {
+    //     console.log("Error");
+    //   })
+  };
 
   render() {
     const { posts } = this.state;
