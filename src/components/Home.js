@@ -1,20 +1,46 @@
 import React, { Component } from 'react';
-import { Card, Container, Row, Col } from 'react-bootstrap';
+import { Card, Container, Row, Col, Button, Form } from 'react-bootstrap';
+import axios from 'axios';
 
 export default class Home extends Component {
 	state = {
-		posts : []
+		posts: [],
+		content: null
 	};
+
+	handleCommentSubmit = (result) => {
+		if (localStorage.token) {
+			let formData = new FormData();
+			formData.append("content", this.state.content);
+			formData.append("post", result._id);
+			axios({
+				method: "POST",
+				url: `http://localhost:3001/comments/createcomment`,
+				headers: { token: localStorage.token },
+				data: formData
+			})
+				.then(response => {
+					console.log('App successfully recieves a response', response)
+				})
+				.catch(err => console.log(err))
+		}
+	}
 
 	fetchPosts = () => {
 		fetch('http://localhost:3001/posts', {
-			method : 'GET'
+			method: 'GET'
 		})
 			.then(results => results.json())
 			.then(data => this.setState({ posts: data }))
-			.catch(function(error) {
+			.catch(function (error) {
 				console.log(error);
 			});
+	};
+
+	handleInput = event => {
+		this.setState({
+			[event.target.name]: event.target.value,
+		});
 	};
 
 	componentDidMount() {
@@ -38,6 +64,22 @@ export default class Home extends Component {
 										alt='personal'
 									/>
 									<Card.Text>{post.description}</Card.Text>
+									<Card.Text>{post.comments}</Card.Text>
+									<Form
+										className='commentForm'
+										onSubmit={() => { this.handleCommentSubmit(post) }}
+										autoComplete='on'
+									>
+										<Form.Group controlId=''>
+											<Form.Label>Comment</Form.Label>
+											<Form.Control
+												type='text'
+												name='content'
+												placeholder='Enter comment'
+												onChange={this.handleInput}
+											/>
+										</Form.Group>
+									</Form>
 								</Card.Body>
 								<i className='fas fa-heart-circle' />
 							</Card>

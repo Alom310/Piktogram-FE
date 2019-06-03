@@ -27,6 +27,8 @@ export default class SignUpForm extends Component {
 	};
 
 	handleSignUp = event => {
+		event.preventDefault();
+
 		let formData = new FormData();
 		formData.append("image", this.state.avatar);
 		formData.append("firstName", this.state.firstName);
@@ -109,12 +111,6 @@ export default class SignUpForm extends Component {
 								onChange={this.handleInput}
 							/>
 						</Form.Group>
-						<Form.Group controlId='formBasicChecbox'>
-							<Form.Check
-								type='checkbox'
-								label='I agree to the terms and conditions...'
-							/>
-						</Form.Group>
 
 						<Form.Group controlId="">
 							<Form.Label>Bio</Form.Label>
@@ -126,8 +122,11 @@ export default class SignUpForm extends Component {
 							<Form.Control type='file' name='image' placeholder="Choose your profile image" onChange={this.handleInput} />
 						</Form.Group>
 
-						<Form.Group controlId="formBasicChecbox">
-							<Form.Check type="checkbox" label="I agree to the terms and conditions..." />
+						<Form.Group controlId='formBasicChecbox'>
+							<Form.Check
+								type='checkbox'
+								label='I agree to the terms and conditions...'
+							/>
 						</Form.Group>
 						<div className="text-center">
 							<Button variant="primary" type="submit">
