@@ -44,7 +44,8 @@ export default class SignUpForm extends Component {
     formData.append("bio", this.state.bio);
     axios({
       method: "POST",
-      url: `http://localhost:3001/users/signup`,
+      // url: `http://localhost:3001/users/signup`,
+      url: `https://piktogram-be.herokuapp.com/users/signup`,
       headers: { token: localStorage.token },
       data: formData
     })
