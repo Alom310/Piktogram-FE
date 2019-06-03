@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Card, Container, Row, Col } from 'react-bootstrap';
-
+import '../styles/Home.css';
 export default class Home extends Component {
 	state = {
 		posts : []
@@ -25,11 +25,11 @@ export default class Home extends Component {
 		let image = `http://localhost:3001/resources/images/${post.fileName}`;
 
 		return (
-			<div key={index}>
+			<div key={index} className='home-section'>
 				<Container>
 					<Row>
-						<Col sm={8}>
-							<Card style={{ width: '32rem' }}>
+						<Col sm={7} md={6} lg={8}>
+							<Card className='card-picture'>
 								<Card.Title>{post.user}</Card.Title>
 								<Card.Body>
 									<Card.Img
@@ -42,7 +42,7 @@ export default class Home extends Component {
 								<i className='fas fa-heart-circle' />
 							</Card>
 						</Col>
-						<Col sm={4}>
+						<Col sm={5} xd={6} lg={4}>
 							<h1> small section</h1>
 						</Col>
 					</Row>
