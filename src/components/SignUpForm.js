@@ -117,19 +117,6 @@ export default class SignUpForm extends Component {
 								onChange={this.handleInput}
 							/>
 						</Form.Group>
-						<Form.Group controlId='formBasicChecbox'>
-							<Form.Check
-								type='checkbox'
-								label='I agree to the terms and conditions...'
-							/>
-						</Form.Group>
-						<div className='text-center'>
-							<Button variant='primary' type='submit'>
-								Submit
-							</Button>
-						</div>
-
-
 
             <Form.Group controlId="">
               <Form.Label>Bio</Form.Label>
