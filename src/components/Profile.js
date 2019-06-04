@@ -70,11 +70,6 @@ export default class Profile extends Component {
   }
 
   handleSignOut = () => {
-    this.setState({
-      email: null,
-      password: null,
-    });
-    this.props.signedOut()
     localStorage.clear();
     window.location.href = "/"
   }
