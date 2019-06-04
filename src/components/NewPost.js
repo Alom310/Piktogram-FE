@@ -28,7 +28,8 @@ export default class NewPost extends Component {
 			formData.append('image', this.state.fileName);
 			axios({
 				method  : 'POST',
-				url     : `http://localhost:3001/posts/createpost`,
+        // url     : `http://localhost:3001/posts/createpost`,
+        url     : `http://piktogram-be.heroku.com/posts/createpost`,
 				headers : { token: localStorage.token },
 				data    : formData
 			})
