@@ -19,7 +19,7 @@ export default class SignInForm extends Component {
 		event.preventDefault();
 		axios
 			// .post('http://localhost:3001/users/login', {
-			.post('http://piktogram-be.heroku.com/users/login', {
+			.post('https://piktogram-be.heroku.com/users/login', {
 				email: this.state.email,
 				password: this.state.password
 			})
