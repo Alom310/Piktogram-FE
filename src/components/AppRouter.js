@@ -8,6 +8,7 @@ import SearchBar from './SearchBar';
 import NewPost from './NewPost';
 import Notifications from './Notifications';
 import Profile from './Profile';
+import '../styles/AppRouter.css';
 
 function AppRouter() {
 	return (
@@ -24,7 +25,7 @@ function AppRouter() {
 						<h3>Piktogram</h3>
 					</div>
 					<nav>
-						<ul className='d-flex flex-row justify-content-around'>
+						<ul className='d-flex flex-row justify-content-around nav-ul'>
 							<li>
 								<Link to='/'>Home</Link>
 							</li>

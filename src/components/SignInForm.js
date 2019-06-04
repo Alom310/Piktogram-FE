@@ -73,15 +73,6 @@ export default class SignInForm extends Component {
 					</div>
 				</Form>
 			</div>
-			//   <div>
-			//     <form onSubmit={this.handleSignIn}>
-			//       <input name="email" placeholder="Email" onChange={this.handleInput} />
-			//       <input type="password" name="password" placeholder="Password" onChange={this.handleInput} />
-			//       <input type="submit" name="submit" placeholder="submit" />
-			//     </form>
-			//     Don't have an account?
-			//     <button onClick={this.props.onSignUp}>Sign Up</button>
-			//   </div>
 		);
 	}
 }

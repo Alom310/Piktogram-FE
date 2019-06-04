@@ -1,28 +1,33 @@
-header{
-    background-color: #00F8FF;
+header {
+    background-color: #fff;
+    border-bottom: 1px solid rgba(0, 0, 0, .0975);
     display: none;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
 }
 
-h3{
+h3 {
     font-family: 'Lobster', cursive;
 }
 
-#logoImg{
-    width:30px;
-    height:30px;
+#logoImg {
+    width: 30px;
+    height: 30px;
 }
 
-ul{
+ul {
     list-style-type: none;
 }
 
-li{
+li {
     text-decoration: none;
     padding-left: 16px;
 }
 
-@media only screen and (max-width: 400px){
-    header{
+@media only screen and (max-width: 400px) {
+    header {
         display: block;
     }
 
