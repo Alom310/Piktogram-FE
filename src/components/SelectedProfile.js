@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios';
+import urls from "../urls/url-paths"
 export default class SelectedProfile extends Component {
 
   state = {
@@ -29,7 +30,7 @@ export default class SelectedProfile extends Component {
     if (localStorage.token) {
       axios({
         method: "GET",
-        url: `http://localhost:3001/users/myprofile`,
+        url: urls.myprofile,
         headers: { token: localStorage.token }
       })
         .then(response => {
@@ -43,7 +44,7 @@ export default class SelectedProfile extends Component {
   }
 
   fetchPosts = () => {
-    fetch("http://localhost:3001/posts", {
+    fetch(urls.posts, {
       method: "GET"
     })
       .then(results => results.json())
@@ -53,7 +54,7 @@ export default class SelectedProfile extends Component {
 
   _renderPosts = (post, index) => {
     if (post.user === this.props.selectedUser._id) {
-      let image = `http://localhost:3001/resources/images/${post.fileName}`
+      let image = `${urls.images}${post.fileName}`
       return (
         <div key={index}>
           <h3>{post.description}</h3>
@@ -72,7 +73,7 @@ export default class SelectedProfile extends Component {
     if (localStorage.token) {
       axios({
         method: "GET",
-        url: `http://localhost:3001/users/myprofile`,
+        url: urls.myprofile,
         headers: { token: localStorage.token }
       })
         .then(response => {
@@ -92,7 +93,7 @@ export default class SelectedProfile extends Component {
     // this.setFollowers();
     axios({
       method: "PUT",
-      url: `http://localhost:3001/users/${this.props.selectedUser._id}/follow`,
+      url: `${urls.users}${this.props.selectedUser._id}/follow`,
       headers: { token: localStorage.token }
     })
       .then(res => {

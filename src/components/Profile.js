@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Button, Container, Row, Col } from 'react-bootstrap';
 import '../styles/Profile.css';
 import profile from '../styles/profile.jpeg';
+import urls from "../urls/url-paths"
 
 export default class Profile extends Component {
 	state = {
@@ -15,7 +16,7 @@ export default class Profile extends Component {
 		if (localStorage.token) {
 			axios({
 				method  : 'GET',
-				url     : `http://localhost:3001/users/myprofile`,
+				url     : urls.myprofile,
 				headers : { token: localStorage.token }
 			})
 				.then(response => {
@@ -32,7 +33,7 @@ export default class Profile extends Component {
 	};
 
 	fetchPosts = () => {
-		fetch('http://localhost:3001/posts', {
+		fetch( urls.posts, {
 			method : 'GET'
 		})
 			.then(results => results.json())
@@ -44,7 +45,7 @@ export default class Profile extends Component {
 
 	_renderPosts = (post, index) => {
 		if (post.user === this.state.user._id) {
-			let image = `http://localhost:3001/resources/images/${post.fileName}`;
+			let image = `${urls.images}${post.fileName}`;
 
 			return (
 				<div className='col-md-4 pb-4' key={index}>
@@ -78,7 +79,13 @@ export default class Profile extends Component {
 		this.setState({
 			editProfile : true
 		});
-	};
+  };
+  
+  handleSignOut = () => {
+    localStorage.clear();
+    window.location.href = "/"
+  }
+
 	render() {
 		const { posts } = this.state;
 		if (this.state.user) {

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Card, Container, Row, Col, Form } from 'react-bootstrap';
 import '../styles/Home.css';
 import axios from 'axios';
+import urls from "../urls/url-paths";
 export default class Home extends Component {
 	state = {
 		posts   : [],
@@ -15,7 +16,7 @@ export default class Home extends Component {
 			formData.append('post', result._id);
 			axios({
 				method  : 'POST',
-				url     : `http://localhost:3001/comments/createcomment`,
+				url     : urls.create_comment,
 				headers : { token: localStorage.token },
 				data    : formData
 			})
@@ -30,7 +31,7 @@ export default class Home extends Component {
 	};
 
 	fetchPosts = () => {
-		fetch('http://localhost:3001/posts', {
+		fetch(urls.posts, {
 			method : 'GET'
 		})
 			.then(results => results.json())
@@ -51,7 +52,7 @@ export default class Home extends Component {
 	}
 
 	_renderPosts = (post, index) => {
-		let image = `http://localhost:3001/resources/images/${post.fileName}`;
+		let image = `${urls.images}${post.fileName}`;
 
 		return (
 			<div key={index} className='home-section'>
