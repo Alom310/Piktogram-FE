@@ -1,4 +1,10 @@
 .nav-ul {
     margin-bottom: 1rem;
     padding-right: 4rem;
+    margin-top: 14px;
+    color: white;
+}
+
+.nav-ul li a {
+    color: black;
 }

@@ -1,11 +1,13 @@
 .home-section {
-   padding-top: 60px;
-   background-color: #fafafa;
+    padding-top: 60px;
+    background-color: #fafafa;
 
 }
 
 .card-picture {
     width: 100%;
     margin-bottom: 3rem;
-    box-shadow: 0 1rem 3rem rgba(black, .1);
+    /* box-shadow: 0 1rem 3rem rgba(black, .1); */
+    border: 1px seashell;
+    box-shadow: 3px 6px 10px #eee;
 }
