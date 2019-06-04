@@ -6,13 +6,9 @@ import profile from '../styles/profile.jpeg';
 
 export default class Profile extends Component {
 	state = {
-		user  : null,
-		posts : []
-	};
-
-	handleSignOut = () => {
-		localStorage.clear();
-		window.location.href = '/';
+		user        : null,
+		posts       : [],
+		editProfile : false
 	};
 
 	getUser = () => {
@@ -78,9 +74,13 @@ export default class Profile extends Component {
 		this.fetchPosts();
 	};
 
+	setEdit = () => {
+		this.setState({
+			editProfile : true
+		});
+	};
 	render() {
 		const { posts } = this.state;
-
 		if (this.state.user) {
 			return (
 				<div className='mw-custom'>
