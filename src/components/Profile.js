@@ -7,9 +7,9 @@ import urls from "../urls/url-paths"
 
 export default class Profile extends Component {
 	state = {
-		user        : null,
-		posts       : [],
-		editProfile : false
+		user: null,
+		posts: [],
+		editProfile: false
 	};
 
 	getUser = () => {
@@ -21,7 +21,7 @@ export default class Profile extends Component {
 			})
 				.then(response => {
 					this.setState({
-						user : response.data
+						user: response.data
 					});
 					console.log(
 						'App successfully recieves a response',
@@ -38,7 +38,7 @@ export default class Profile extends Component {
 		})
 			.then(results => results.json())
 			.then(data => this.setState({ posts: data }))
-			.catch(function(error) {
+			.catch(function (error) {
 				console.log(error);
 			});
 	};
@@ -77,7 +77,7 @@ export default class Profile extends Component {
 
 	setEdit = () => {
 		this.setState({
-			editProfile : true
+			editProfile: true
 		});
   };
   
@@ -147,8 +147,8 @@ export default class Profile extends Component {
 							{posts ? (
 								posts.map(this._renderPosts)
 							) : (
-								'No posts yet...'
-							)}
+									'No posts yet...'
+								)}
 						</Row>
 					</Container>
 
