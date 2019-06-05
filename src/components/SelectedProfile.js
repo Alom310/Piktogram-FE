@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import urls from "../urls/url-paths"
+import profile from '../styles/profile.jpeg';
+import { Button, Container, Row, Col } from 'react-bootstrap';
+
 export default class SelectedProfile extends Component {
 
   state = {
@@ -21,7 +24,7 @@ export default class SelectedProfile extends Component {
     if (localStorage.token) {
       axios({
         method: "GET",
-        url: urls.myprofile,
+        url: urls.profile,
         headers: { token: localStorage.token }
       })
         .then(response => {
@@ -44,33 +47,20 @@ export default class SelectedProfile extends Component {
   }
 
   _renderPosts = (post, index) => {
-    if (post.user === this.props.selectedUser._id) {
+    if (post.user._id === this.props.selectedUser._id) {
       let image = `${urls.images}${post.fileName}`
       return (
-        <div key={index}>
-          <h3>{post.description}</h3>
-          <img src={image} alt="" />
+        <div className='col-md-4 pb-4' key={index}>
+          <div className='parent_overlay'>
+            <div className='child_overlay'> Hello</div>
+            <div className='child-content'>
+              <img src={image} alt='' className='w-100' />
+            </div>
+          </div>
         </div>
       )
     } else {
       return null;
-    }
-  }
-
-  getUser = () => {
-    if (localStorage.token) {
-      axios({
-        method: "GET",
-        url: urls.myprofile,
-        headers: { token: localStorage.token }
-      })
-        .then(response => {
-          this.setState({
-            user: response.data
-          })
-          console.log('App successfully recieves a response', response)
-        })
-        .catch(err => console.log(err))
     }
   }
 
@@ -94,14 +84,63 @@ export default class SelectedProfile extends Component {
     if (this.props.selectedUser) {
       return (
         <div>
-          <h2>Posts</h2>
-          <button onClick={this.followUser}>Follow</button>
-          {
-            posts ?
-              posts.map(this._renderPosts)
-              :
-              "No posts yet..."
-          }
+          {/* <h2>Posts</h2> */}
+          <Container className='mt-5 pt-5 pb-5'>
+            <Row>
+              <Col md={3}>
+                <img
+                  src={profile}
+                  alt='profilePic'
+                  className='rounded-circle w-100'
+                />
+              </Col>
+              <Col md={9} className='bio'>
+                <h1>
+                  {this.props.selectedUser.username} <Button onClick={this.followUser}>Follow</Button>
+                </h1>
+                <ul className='d-flex'>
+                  <li> 20 Posts</li>
+                  <li> 30 Followers</li>
+                  <li> 20 Followings</li>
+                </ul>
+                <h1> Bio</h1>
+                Lorem ipsum dolor sit amet consectetur
+								adipisicing elit. Deserunt voluptatibus nihil
+								animi est atque delectus consequatur dolore
+								excepturi fugit adipisci?
+							</Col>
+            </Row>
+          </Container>
+          <Container>
+            <Row className='mb-3'>
+              <Col md={2}>
+                <img
+                  src={profile}
+                  alt='profilePic'
+                  className='rounded-circle w-100'
+                />
+                <h5 className='text-center'>Highlights</h5>
+              </Col>
+              <Col md={2}>
+                <img
+                  src={profile}
+                  alt='profilePic'
+                  className='rounded-circle w-100'
+                />
+                <h5 className='text-center'>Highlights</h5>
+              </Col>
+            </Row>
+          </Container>
+          <Container>
+            <Row className='pt-5 pb-5'>
+              {/* <Col md={4}></Col> */}
+              {posts ? (
+                posts.map(this._renderPosts)
+              ) : (
+                  'No posts yet...'
+                )}
+            </Row>
+          </Container>
         </div>
       )
     } else {
