@@ -5,11 +5,22 @@ import '../styles/Profile.css';
 import profile from '../styles/profile.jpeg';
 import urls from "../urls/url-paths"
 
-export default class Profile extends Component {
+class Profile extends Component {
 	state = {
 		user: null,
 		posts: [],
 		editProfile: false
+	};
+
+	handleSignOut = () => {
+		localStorage.clear();
+		window.location.href = '/';
+	};
+
+	editPic = () => {
+		this.setState({
+			editProfile : this.state.editProfile ? false : true
+		});
 	};
 
 	getUser = () => {
@@ -47,28 +58,40 @@ export default class Profile extends Component {
 		if (post.user === this.state.user._id) {
 			let image = `${urls.images}${post.fileName}`;
 
+
 			return (
 				<div className='col-md-4 pb-4' key={index}>
 					<div className='parent_overlay'>
-						<div className='child_overlay'> Hello</div>
+						<div className='child_overlay'>{post.description}</div>
 						<div className='child-content'>
-							<img src={image} alt='' className='w-100' />
+							<img
+								src={image}
+								alt='postPicture'
+								className='w-100'
+							/>
 						</div>
 					</div>
-					{/* <Col md={4} key={index}> */}
-					{/* <h3>{post.description}</h3> */}
-
-					{/* <img src={image} alt='' className='w-100' /> */}
-
-					{/* </Col> */}
-					{/* <h3>{post.description}</h3>
-					<img src={image} alt='' /> */}
 				</div>
 			);
 		} else {
 			return null;
 		}
 	};
+
+	// TODO: need to fix uploading user profile image. 
+	// _renderImage = (post, index) => {
+	// 	if (post.user._id === this.state.user._id) {
+	// 		let image = `http://localhost:3001/resources/images/${post.fileName}`;
+
+	// 		return (
+	// 			<div className='col-md-4 pb-4' key={index}>
+	// 				<img src={image} alt='profilePicture' className='w-100' />
+	// 			</div>
+	// 		);
+	// 	} else {
+	// 		return null;
+	// 	}
+	// };
 
 	componentDidMount = () => {
 		this.getUser();
@@ -79,16 +102,27 @@ export default class Profile extends Component {
 		this.setState({
 			editProfile: true
 		});
-  };
+
   
   handleSignOut = () => {
     localStorage.clear();
     window.location.href = "/"
   }
 
+
 	render() {
 		const { posts } = this.state;
+		console.log("here's are all the posts", posts);
+
 		if (this.state.user) {
+			const buttonEdit = this.state.editProfile ? (
+				<div>
+					<input type='file' />
+					<Button onClick={this.editPic}>Cancel</Button>
+				</div>
+			) : (
+				<Button onClick={this.editPic}>Edit!</Button>
+			);
 			return (
 				<div className='mw-custom'>
 					{/* <h2>Posts</h2> */}
@@ -102,10 +136,14 @@ export default class Profile extends Component {
 								/>
 							</Col>
 							<Col md={9} className='bio'>
-								<h1>
-									Edit Profile <Button>Edit!</Button>
-								</h1>
-                
+
+								<h1>Edit Profile</h1>
+								{buttonEdit}
+								<Button className='submit_button'>
+									Submit
+								</Button>
+								<h1>{posts[0].user.username}</h1>
+
 								<ul className='d-flex'>
 									<li> 20 Posts</li>
 									<li> 30 Followers</li>
@@ -143,7 +181,6 @@ export default class Profile extends Component {
 
 					<Container>
 						<Row className='pt-5 pb-5'>
-							{/* <Col md={4}></Col> */}
 							{posts ? (
 								posts.map(this._renderPosts)
 							) : (
@@ -160,8 +197,6 @@ export default class Profile extends Component {
 							</Col>
 						</Row>
 					</Container>
-
-					{/* {posts ? posts.map(this._renderPosts) : 'No posts yet...'} */}
 					<Button onClick={this.handleSignOut}>Logout</Button>
 				</div>
 			);
@@ -170,3 +205,5 @@ export default class Profile extends Component {
 		}
 	}
 }
+
+export default Profile;

@@ -74,6 +74,7 @@ export default class Home extends Component {
 						<Col sm={7} md={6} lg={8}>
 							<Card className='card-picture'>
 								<Card.Title>{post.user.username}</Card.Title>
+
 								<Card.Body>
 									<Card.Img
 										variant='top'
@@ -103,11 +104,17 @@ export default class Home extends Component {
               			</Button>
 									</Form>
 								</Card.Body>
-								<i className='fas fa-heart-circle' />
 							</Card>
 						</Col>
 						<Col sm={5} xd={6} lg={4}>
-							<h1> small section</h1>
+							<h1> Stories</h1>
+							<div className='row'>
+								<div className='first_col'>
+									Lorem ipsum dolor sit, amet consectetur
+									adipisicing elit. Esse optio doloribus
+								</div>
+								<div className='second_col'>two</div>
+							</div>
 						</Col>
 					</Row>
 				</Container>
