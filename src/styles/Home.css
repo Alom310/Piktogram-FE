@@ -11,3 +11,26 @@
     border: 1px seashell;
     box-shadow: 3px 6px 10px #eee;
 }
+
+.username {
+    text-align: center;
+    padding-top: 2rem;
+}
+
+.submit_button {
+    margin-left: 10px;
+}
+
+.first_col {
+    width: 100%;
+    background-color: #fefefe;
+    height: 300px;
+    margin-bottom: 10px;
+}
+
+.second_col {
+    width: 100%;
+    background-color: #fefefe;
+    height: 300px;
+
+}
