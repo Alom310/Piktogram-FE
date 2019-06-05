@@ -105,6 +105,7 @@ export default class Profile extends Component {
 								<h1>
 									Edit Profile <Button>Edit!</Button>
 								</h1>
+                
 								<ul className='d-flex'>
 									<li> 20 Posts</li>
 									<li> 30 Followers</li>
