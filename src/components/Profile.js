@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Button, Container, Row, Col } from 'react-bootstrap';
 import '../styles/Profile.css';
 import profile from '../styles/profile.jpeg';
+import urls from "../urls/url-paths"
 
 export default class Profile extends Component {
 	state = {
@@ -14,9 +15,9 @@ export default class Profile extends Component {
 	getUser = () => {
 		if (localStorage.token) {
 			axios({
-				method: 'GET',
-				url: `http://localhost:3001/users/myprofile`,
-				headers: { token: localStorage.token }
+				method  : 'GET',
+				url     : urls.myprofile,
+				headers : { token: localStorage.token }
 			})
 				.then(response => {
 					this.setState({
@@ -32,8 +33,8 @@ export default class Profile extends Component {
 	};
 
 	fetchPosts = () => {
-		fetch('http://localhost:3001/posts', {
-			method: 'GET'
+		fetch( urls.posts, {
+			method : 'GET'
 		})
 			.then(results => results.json())
 			.then(data => this.setState({ posts: data }))
@@ -44,7 +45,7 @@ export default class Profile extends Component {
 
 	_renderPosts = (post, index) => {
 		if (post.user === this.state.user._id) {
-			let image = `http://localhost:3001/resources/images/${post.fileName}`;
+			let image = `${urls.images}${post.fileName}`;
 
 			return (
 				<div className='col-md-4 pb-4' key={index}>
@@ -78,12 +79,12 @@ export default class Profile extends Component {
 		this.setState({
 			editProfile: true
 		});
-	};
-
-	handleSignOut = () => {
-		localStorage.clear();
-		window.location.href = "/"
-	}
+  };
+  
+  handleSignOut = () => {
+    localStorage.clear();
+    window.location.href = "/"
+  }
 
 	render() {
 		const { posts } = this.state;

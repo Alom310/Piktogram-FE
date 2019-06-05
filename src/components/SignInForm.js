@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Form, Button } from 'react-bootstrap';
 import '../styles/SignInForm.css';
+import urls from "../urls/url-paths"
 
 export default class SignInForm extends Component {
 	state = {
@@ -16,10 +17,10 @@ export default class SignInForm extends Component {
 	};
 
 	handleSignIn = event => {
+		console.log(urls.login)
 		event.preventDefault();
 		axios
-			.post('http://localhost:3001/users/login', {
-			// .post('https://piktogram-be.heroku.com/users/login', {
+			.post( urls.login, {
 				email: this.state.email,
 				password: this.state.password
 			})

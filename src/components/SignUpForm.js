@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Form, Button } from 'react-bootstrap';
 import '../styles/SignUpForm.css';
+import urls from "../urls/url-paths"
 export default class SignUpForm extends Component {
 
 	state = {
@@ -39,7 +40,7 @@ export default class SignUpForm extends Component {
 		formData.append("bio", this.state.bio);
 		axios({
 			method: "POST",
-			url: `http://localhost:3001/users/signup`,
+      url: urls.signup,
 			headers: { token: localStorage.token },
 			data: formData
 		})

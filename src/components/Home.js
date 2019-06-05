@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Card, Container, Row, Col, Form, Button } from 'react-bootstrap';
 import '../styles/Home.css';
 import axios from 'axios';
+import urls from "../urls/url-paths";
 export default class Home extends Component {
 	state = {
 		posts: [],
@@ -36,8 +37,8 @@ export default class Home extends Component {
 	};
 
 	fetchPosts = () => {
-		fetch('http://localhost:3001/posts', {
-			method: 'GET'
+		fetch(urls.posts, {
+			method : 'GET'
 		})
 			.then(results => results.json())
 			.then(data => this.setState({ posts: data }))
