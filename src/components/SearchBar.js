@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 import SelectedProfile from './SelectedProfile';
 import '../styles/SearchBar.css';
+import urls from "../urls/url-paths"
 
 export default class SearchBar extends Component {
 	state = {
@@ -13,7 +14,7 @@ export default class SearchBar extends Component {
 
 	fetchUsers = e => {
 		e.preventDefault();
-		fetch(`http://localhost:3001/users/search?s=${this.state.query}`, {
+		fetch(`${urls.search}${this.state.query}`, {
 			method : 'GET'
 		})
 			.then(results => results.json())

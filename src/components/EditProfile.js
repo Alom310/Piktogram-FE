@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-
+import urls from "../urls/url-paths";
 export default class EditProfile extends Component {
 	handleEditProfile = event => {
 		event.preventDefault();
 		axios
-			.put(`http://localhost:3001/users/${this.props.user._id}/update`, {
+			.put(`${urls.users}${this.props.user._id}/update`, {
 				firstName : this.state.firstName,
 				lastName  : this.state.lastName,
 				email     : this.state.email,
