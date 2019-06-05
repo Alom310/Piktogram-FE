@@ -101,7 +101,9 @@ class Profile extends Component {
 	setEdit = () => {
 		this.setState({
 			editProfile: true
-		});
+    });
+    
+  };
 
   
   handleSignOut = () => {
@@ -205,5 +207,6 @@ class Profile extends Component {
 		}
 	}
 }
+
 
 export default Profile;
