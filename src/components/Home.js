@@ -60,7 +60,7 @@ export default class Home extends Component {
 					<Row>
 						<Col sm={7} md={6} lg={8}>
 							<Card className='card-picture'>
-								<Card.Title>{post.user}</Card.Title>
+								<Card.Title>{post.user.username}</Card.Title>
 								<Card.Body>
 									<Card.Img
 										variant='top'
