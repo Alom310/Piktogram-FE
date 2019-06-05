@@ -12,10 +12,6 @@ export default class Home extends Component {
 	handleCommentSubmit = (result) => {
 
 		if (localStorage.token) {
-			// let formData = new FormData();
-			// formData.append('content', this.state.content);
-
-			// console.log(formData);
 			axios({
 				method: 'PUT',
 				url: `${urls.posts}${result._id}/addcomment`,
@@ -58,14 +54,10 @@ export default class Home extends Component {
 	}
 
 	_renderPosts = (post, index) => {
-		let image = `${urls.images}${post.fileName}`;
-		// const { comments } = this.state.posts.comments;
-		// comments.map(comment, index) => {
-		// 	return (comment.content);
-		// }
+		let image = `http://localhost:3001/resources/images/${post.fileName}`;
 		let comments = [];
 		for (let i = 0; i < post.comments.length; i++) {
-			comments.push(post.comments[i].content);
+			comments.push(<Card.Text>{post.comments[i].content} - <i>{post.comments[i].username}</i></Card.Text>);
 		}
 		return (
 			<div key={index} className='home-section'>
@@ -81,8 +73,8 @@ export default class Home extends Component {
 										src={image}
 										alt='personal'
 									/>
-									<Card.Text>{post.description}</Card.Text>
-									<Card.Text>{comments}</Card.Text>
+									<Card.Text><b>{post.description}</b></Card.Text>
+									{comments}
 									<Form
 										className='commentForm'
 										onSubmit={() => {
@@ -91,11 +83,10 @@ export default class Home extends Component {
 										autoComplete='on'
 									>
 										<Form.Group controlId=''>
-											<Form.Label>Comment</Form.Label>
 											<Form.Control
 												type='text'
 												name='content'
-												placeholder='Enter comment'
+												placeholder='Add a comment'
 												onChange={this.handleInput}
 											/>
 										</Form.Group>

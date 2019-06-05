@@ -26,9 +26,9 @@ class Profile extends Component {
 	getUser = () => {
 		if (localStorage.token) {
 			axios({
-				method  : 'GET',
-				url     : urls.myprofile,
-				headers : { token: localStorage.token }
+				method: 'GET',
+				url: urls.myprofile,
+				headers: { token: localStorage.token }
 			})
 				.then(response => {
 					this.setState({
@@ -44,8 +44,8 @@ class Profile extends Component {
 	};
 
 	fetchPosts = () => {
-		fetch( urls.posts, {
-			method : 'GET'
+		fetch(urls.posts, {
+			method: 'GET'
 		})
 			.then(results => results.json())
 			.then(data => this.setState({ posts: data }))
@@ -55,7 +55,7 @@ class Profile extends Component {
 	};
 
 	_renderPosts = (post, index) => {
-		if (post.user === this.state.user._id) {
+		if (post.user._id === this.state.user._id) {
 			let image = `${urls.images}${post.fileName}`;
 
 
@@ -138,14 +138,9 @@ class Profile extends Component {
 								/>
 							</Col>
 							<Col md={9} className='bio'>
-
-								<h1>Edit Profile</h1>
-								{buttonEdit}
-								<Button className='submit_button'>
-									Submit
-								</Button>
-								<h1>{posts[0].user.username}</h1>
-
+								<h1>
+									{this.state.user.username}<Button>Edit Profile</Button>
+								</h1>
 								<ul className='d-flex'>
 									<li> 20 Posts</li>
 									<li> 30 Followers</li>
