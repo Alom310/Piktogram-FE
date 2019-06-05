@@ -6,21 +6,21 @@ import profile from '../styles/profile.jpeg';
 
 export default class Profile extends Component {
 	state = {
-		user        : null,
-		posts       : [],
-		editProfile : false
+		user: null,
+		posts: [],
+		editProfile: false
 	};
 
 	getUser = () => {
 		if (localStorage.token) {
 			axios({
-				method  : 'GET',
-				url     : `http://localhost:3001/users/myprofile`,
-				headers : { token: localStorage.token }
+				method: 'GET',
+				url: `http://localhost:3001/users/myprofile`,
+				headers: { token: localStorage.token }
 			})
 				.then(response => {
 					this.setState({
-						user : response.data
+						user: response.data
 					});
 					console.log(
 						'App successfully recieves a response',
@@ -33,11 +33,11 @@ export default class Profile extends Component {
 
 	fetchPosts = () => {
 		fetch('http://localhost:3001/posts', {
-			method : 'GET'
+			method: 'GET'
 		})
 			.then(results => results.json())
 			.then(data => this.setState({ posts: data }))
-			.catch(function(error) {
+			.catch(function (error) {
 				console.log(error);
 			});
 	};
@@ -76,9 +76,15 @@ export default class Profile extends Component {
 
 	setEdit = () => {
 		this.setState({
-			editProfile : true
+			editProfile: true
 		});
 	};
+
+	handleSignOut = () => {
+		localStorage.clear();
+		window.location.href = "/"
+	}
+
 	render() {
 		const { posts } = this.state;
 		if (this.state.user) {
@@ -139,8 +145,8 @@ export default class Profile extends Component {
 							{posts ? (
 								posts.map(this._renderPosts)
 							) : (
-								'No posts yet...'
-							)}
+									'No posts yet...'
+								)}
 						</Row>
 					</Container>
 

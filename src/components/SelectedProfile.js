@@ -4,9 +4,7 @@ export default class SelectedProfile extends Component {
 
   state = {
     posts: [],
-    user: null,
-    // followers: [],
-    // following: []
+    user: null
   }
 
   componentWillReceiveProps() {
@@ -17,13 +15,6 @@ export default class SelectedProfile extends Component {
     this.fetchPosts();
     this.getUser();
   }
-
-  // setFollowers = () => {
-  //   this.setState({
-  //     followers: this.props.selectedUser.followers.push(this.state.user._id),
-  //     following: this.state.user.following.push(this.props.selectedUser._id)
-  //   })
-  // }
 
   getUser = () => {
     if (localStorage.token) {
@@ -65,9 +56,6 @@ export default class SelectedProfile extends Component {
     }
   }
 
-  // push current user id to selected user's followers array
-  // push selcted user id to current user's following array
-
   getUser = () => {
     if (localStorage.token) {
       axios({
@@ -86,10 +74,6 @@ export default class SelectedProfile extends Component {
   }
 
   followUser = event => {
-
-    // let followersArr = this.props.selectedUser.followers;
-    // let followingArr = this.state.user.following;
-    // this.setFollowers();
     axios({
       method: "PUT",
       url: `http://localhost:3001/users/${this.props.selectedUser._id}/follow`,
@@ -101,17 +85,6 @@ export default class SelectedProfile extends Component {
       .catch(err => {
         console.log("Error");
       })
-    // axios({
-    //   method: "PUT",
-    //   url: `http://localhost:3001/users/${this.state.user._id}/follow`,
-    //   headers: { token: localStorage.token }
-    // })
-    //   .then(res => {
-    //     console.log(res);
-    //   })
-    //   .catch(err => {
-    //     console.log("Error");
-    //   })
   };
 
   render() {
