@@ -1,5 +1,27 @@
+.Title{
+    font-family: 'Lobster', cursive;
+}
+
+#titleImg{
+    width: 45px;
+    height: 45px;
+}
+
 .signUpForm{
-    margin-top: 6rem;
     border: solid lightgray 1px;
     padding:30px;
+}
+
+.signUpImage{
+    margin-right:2rem;
+}
+
+.signUpPage{
+    margin-top: 3rem;
+}
+
+@media only screen and (max-width: 800px) {
+    .signUpImage {
+        display: none;
+    }
 }

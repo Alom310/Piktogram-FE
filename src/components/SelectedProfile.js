@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 import axios from 'axios';
+import urls from "../urls/url-paths"
 export default class SelectedProfile extends Component {
 
   state = {
     posts: [],
-    user: null,
-    // followers: [],
-    // following: []
+    user: null
   }
 
   componentWillReceiveProps() {
@@ -18,18 +17,11 @@ export default class SelectedProfile extends Component {
     this.getUser();
   }
 
-  // setFollowers = () => {
-  //   this.setState({
-  //     followers: this.props.selectedUser.followers.push(this.state.user._id),
-  //     following: this.state.user.following.push(this.props.selectedUser._id)
-  //   })
-  // }
-
   getUser = () => {
     if (localStorage.token) {
       axios({
         method: "GET",
-        url: `http://localhost:3001/users/myprofile`,
+        url: urls.myprofile,
         headers: { token: localStorage.token }
       })
         .then(response => {
@@ -43,7 +35,7 @@ export default class SelectedProfile extends Component {
   }
 
   fetchPosts = () => {
-    fetch("http://localhost:3001/posts", {
+    fetch(urls.posts, {
       method: "GET"
     })
       .then(results => results.json())
@@ -53,7 +45,7 @@ export default class SelectedProfile extends Component {
 
   _renderPosts = (post, index) => {
     if (post.user === this.props.selectedUser._id) {
-      let image = `http://localhost:3001/resources/images/${post.fileName}`
+      let image = `${urls.images}${post.fileName}`
       return (
         <div key={index}>
           <h3>{post.description}</h3>
@@ -65,14 +57,11 @@ export default class SelectedProfile extends Component {
     }
   }
 
-  // push current user id to selected user's followers array
-  // push selcted user id to current user's following array
-
   getUser = () => {
     if (localStorage.token) {
       axios({
         method: "GET",
-        url: `http://localhost:3001/users/myprofile`,
+        url: urls.myprofile,
         headers: { token: localStorage.token }
       })
         .then(response => {
@@ -86,13 +75,9 @@ export default class SelectedProfile extends Component {
   }
 
   followUser = event => {
-
-    // let followersArr = this.props.selectedUser.followers;
-    // let followingArr = this.state.user.following;
-    // this.setFollowers();
     axios({
       method: "PUT",
-      url: `http://localhost:3001/users/${this.props.selectedUser._id}/follow`,
+      url: `${urls.users}${this.props.selectedUser._id}/follow`,
       headers: { token: localStorage.token }
     })
       .then(res => {
@@ -101,17 +86,6 @@ export default class SelectedProfile extends Component {
       .catch(err => {
         console.log("Error");
       })
-    // axios({
-    //   method: "PUT",
-    //   url: `http://localhost:3001/users/${this.state.user._id}/follow`,
-    //   headers: { token: localStorage.token }
-    // })
-    //   .then(res => {
-    //     console.log(res);
-    //   })
-    //   .catch(err => {
-    //     console.log("Error");
-    //   })
   };
 
   render() {

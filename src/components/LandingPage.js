@@ -5,6 +5,7 @@ import SignInForm from './SignInForm';
 import SignUpForm from './SignUpForm';
 import Header from './Header';
 import '../styles/Landing.css';
+import urls from "../urls/url-paths"
 // import 'font-awesome/css/font-awesome.min.css';
 class LandingPage extends Component {
 	state = {
@@ -16,7 +17,7 @@ class LandingPage extends Component {
 		if (localStorage.token) {
 			axios({
 				method  : 'get',
-				url     : `http://localhost:3001/users/`,
+				url     : urls.users,
 				headers : { authorization: `Bearer ${localStorage.token}` }
 			})
 				.then(response => {

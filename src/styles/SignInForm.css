@@ -1,5 +1,4 @@
 .signInForm {
-    margin-top: 6rem;
     border: solid lightgray 1px;
     padding:30px;
 }
@@ -10,4 +9,19 @@
 
 .link:hover{
     color: black;
+}
+
+.signInImage{
+    margin-right:2rem;
+    width:400px;
+}
+
+.signInForm{
+    margin-top: 7rem;
+}
+
+@media only screen and (max-width: 800px) {
+    .signInImage {
+        display: none;
+    }
 }

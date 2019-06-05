@@ -3,12 +3,13 @@ import axios from 'axios';
 import { Button, Container, Row, Col } from 'react-bootstrap';
 import '../styles/Profile.css';
 import profile from '../styles/profile.jpeg';
+import urls from "../urls/url-paths"
 
 class Profile extends Component {
 	state = {
-		user        : null,
-		posts       : [],
-		editProfile : false
+		user: null,
+		posts: [],
+		editProfile: false
 	};
 
 	handleSignOut = () => {
@@ -26,12 +27,12 @@ class Profile extends Component {
 		if (localStorage.token) {
 			axios({
 				method  : 'GET',
-				url     : `http://localhost:3001/users/myprofile`,
+				url     : urls.myprofile,
 				headers : { token: localStorage.token }
 			})
 				.then(response => {
 					this.setState({
-						user : response.data
+						user: response.data
 					});
 					console.log(
 						'App successfully recieves a response',
@@ -43,19 +44,20 @@ class Profile extends Component {
 	};
 
 	fetchPosts = () => {
-		fetch('http://localhost:3001/posts', {
+		fetch( urls.posts, {
 			method : 'GET'
 		})
 			.then(results => results.json())
 			.then(data => this.setState({ posts: data }))
-			.catch(function(error) {
+			.catch(function (error) {
 				console.log(error);
 			});
 	};
 
 	_renderPosts = (post, index) => {
-		if (post.user._id === this.state.user._id) {
-			let image = `http://localhost:3001/resources/images/${post.fileName}`;
+		if (post.user === this.state.user._id) {
+			let image = `${urls.images}${post.fileName}`;
+
 
 			return (
 				<div className='col-md-4 pb-4' key={index}>
@@ -98,9 +100,15 @@ class Profile extends Component {
 
 	setEdit = () => {
 		this.setState({
-			editProfile : true
+			editProfile: true
 		});
-	};
+
+  
+  handleSignOut = () => {
+    localStorage.clear();
+    window.location.href = "/"
+  }
+
 
 	render() {
 		const { posts } = this.state;
@@ -128,12 +136,14 @@ class Profile extends Component {
 								/>
 							</Col>
 							<Col md={9} className='bio'>
+
 								<h1>Edit Profile</h1>
 								{buttonEdit}
 								<Button className='submit_button'>
 									Submit
 								</Button>
 								<h1>{posts[0].user.username}</h1>
+
 								<ul className='d-flex'>
 									<li> 20 Posts</li>
 									<li> 30 Followers</li>
@@ -174,8 +184,8 @@ class Profile extends Component {
 							{posts ? (
 								posts.map(this._renderPosts)
 							) : (
-								'No posts yet...'
-							)}
+									'No posts yet...'
+								)}
 						</Row>
 					</Container>
 
