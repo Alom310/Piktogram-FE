@@ -74,7 +74,7 @@ export default class SearchBar extends Component {
 		}
 
 		return (
-			<div className='search-user'>
+			<div className='search-user d-flex flex-column text-center'>
 				<form onSubmit={this.fetchUsers}>
 					<input
 						name='query'

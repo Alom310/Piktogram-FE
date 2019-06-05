@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import '../styles/NewPost.css';
 import urls from "../urls/url-paths"
+import { Form, Button } from 'react-bootstrap';
+
 
 export default class NewPost extends Component {
 	state = {
@@ -45,20 +47,26 @@ export default class NewPost extends Component {
 
 	render() {
 		return (
-			<div className='new-post-form'>
-				<form onSubmit={this.handleFormSubmit}>
-					<input
-						onChange={this.handleChange}
-						type='file'
-						name='image'
-					/>
-					<input
-						onChange={this.handleChange}
-						type='text'
-						name='description'
-					/>
-					<input type='submit' value='Submit' />
-				</form>
+			<div className="d-flex flex-row justify-content-center">
+				<div className='new-post-form'>
+					<Form onSubmit={this.handleFormSubmit}>
+						<Form.Group controlId="">
+							<Form.Label>Upload New Photo</Form.Label>
+							<Form.Control type='file' name='image' placeholder="Choose image" onChange={this.handleChange} />
+						</Form.Group>
+
+						<Form.Group controlId="">
+							<Form.Label>Description</Form.Label>
+							<Form.Control
+								onChange={this.handleChange}
+								type='text'
+								name='description'
+								placeholder ='description'
+							/>
+						</Form.Group>
+						<input type='submit' value='Submit' />
+					</Form>
+				</div>
 			</div>
 		);
 	}

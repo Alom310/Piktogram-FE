@@ -18,7 +18,7 @@ export default class Home extends Component {
 			// console.log(formData);
 			axios({
 				method: 'PUT',
-				url: `http://localhost:3001/posts/${result._id}/addcomment`,
+				url: `${urls.posts}${result._id}/addcomment`,
 				headers: { token: localStorage.token },
 				data: {
 					content: this.state.content
@@ -58,7 +58,7 @@ export default class Home extends Component {
 	}
 
 	_renderPosts = (post, index) => {
-		let image = `http://localhost:3001/resources/images/${post.fileName}`;
+		let image = `${urls.images}${post.fileName}`;
 		// const { comments } = this.state.posts.comments;
 		// comments.map(comment, index) => {
 		// 	return (comment.content);
