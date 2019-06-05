@@ -1,3 +1,6 @@
 .new-post-form {
     margin-top: 4rem;
+    border: solid lightgray 1px;
+    width:400px;
+    padding:30px;
 }

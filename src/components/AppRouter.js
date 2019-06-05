@@ -15,7 +15,7 @@ function AppRouter() {
 		<Router>
 			<div>
 				<header className='d-flex flex-row justify-content-between'>
-					<div className='d-flex '>
+					<div className='d-flex nav_bar '>
 						<img
 							id='logoImg'
 							src={logo}

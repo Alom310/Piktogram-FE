@@ -8,3 +8,8 @@
 .nav-ul li a {
     color: black;
 }
+
+.nav_bar {
+    padding-left: 20px;
+    padding-top: 3px;
+}
