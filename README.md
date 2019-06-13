@@ -1,4 +1,6 @@
-![logo](../master/logo.png)
+<p align="center">
+  <img src="../master/logo.png">
+</p>
 
 ![front page](../master/front_page.png)
 
