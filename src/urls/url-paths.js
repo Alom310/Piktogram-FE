@@ -1,5 +1,5 @@
 let url = {};
-url.base=  "http://piktogram-be.herokuapp.com/";
+url.base=  "https://piktogram-be.herokuapp.com/";
 // url.base = "http://localhost:3001/";
 url.login = url.base + "users/login";
 url.signup = url.base + "users/signup";
