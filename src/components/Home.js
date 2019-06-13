@@ -34,7 +34,7 @@ export default class Home extends Component {
 
 	fetchPosts = () => {
 		fetch(urls.posts, {
-			method : 'GET'
+			method: 'GET'
 		})
 			.then(results => results.json())
 			.then(data => this.setState({ posts: data }))
@@ -54,7 +54,8 @@ export default class Home extends Component {
 	}
 
 	_renderPosts = (post, index) => {
-		let image = `http://localhost:3001/resources/images/${post.fileName}`;
+		// let image = `http://localhost:3001/resources/images/${post.fileName}`;
+		let image = `https://cors-anywhere.herokuapp.com/https://immense-spire-50040.herokuapp.com/resources/images/${post.fileName}`
 		let comments = [];
 		for (let i = 0; i < post.comments.length; i++) {
 			comments.push(<Card.Text>{post.comments[i].content} - <i>{post.comments[i].username}</i></Card.Text>);
