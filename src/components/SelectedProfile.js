@@ -8,7 +8,8 @@ export default class SelectedProfile extends Component {
 
   state = {
     posts: [],
-    user: null
+    user: null,
+    followed: false,
   }
 
   componentWillReceiveProps() {
@@ -18,24 +19,70 @@ export default class SelectedProfile extends Component {
   componentDidMount = () => {
     this.fetchPosts();
     this.getUser();
+    // this.hideButton();
+  }
+
+  checkFollowers = () => {
+    if (this.props.selectedUser) {
+      for (let i = 0; i < this.props.selectedUser.followers.length; i++) {
+        if (this.props.selectedUser.followers[i].username === this.state.user.username) {
+          this.setState({
+            followed: true
+          })
+          this.hideFollowButton();
+        } else {
+          console.log("You are not following this user");
+        }
+      }
+    }
+  }
+
+  hideFollowButton = () => {
+      // function removeEvent(el, type, handler) {
+      //   if (el.detachEvent) el.detachEvent('on'+type, handler); else el.removeEventListener(type, handler);
+      // }
+      var element = document.getElementById("follow");
+      element.textContent = "Following ✓";
+      element.removeEventListener('click', this.followUser);
   }
 
   getUser = () => {
     if (localStorage.token) {
       axios({
-        method: "GET",
-        url: urls.profile,
+        method: 'GET',
+        url: urls.myprofile,
         headers: { token: localStorage.token }
       })
         .then(response => {
           this.setState({
             user: response.data
-          })
-          console.log('App successfully recieves a response', response)
+          });
+          this.checkFollowers();
+          console.log(
+            'App successfully recieves a response',
+            response
+          );
         })
-        .catch(err => console.log(err))
+        .catch(err => console.log(err));
     }
-  }
+  };
+
+  // getUser = () => {
+  //   if (localStorage.token) {
+  //     axios({
+  //       method: "GET",
+  //       url: urls.profile,
+  //       headers: { token: localStorage.token }
+  //     })
+  //       .then(response => {
+  //         this.setState({
+  //           user: response.data
+  //         })
+  //         console.log('App successfully recieves a response', response)
+  //       })
+  //       .catch(err => console.log(err))
+  //   }
+  // }
 
   fetchPosts = () => {
     fetch(urls.posts, {
@@ -64,19 +111,46 @@ export default class SelectedProfile extends Component {
     }
   }
 
-  followUser = event => {
-    axios({
-      method: "PUT",
-      url: `${urls.users}${this.props.selectedUser._id}/follow`,
-      headers: { token: localStorage.token }
-    })
-      .then(res => {
-        console.log(res);
+  followUser = () => {
+    if (this.state.followed) {
+      return null;
+    } else {
+      axios({
+        method: "PUT",
+        url: `${urls.users}${this.props.selectedUser._id}/follow`,
+        headers: { token: localStorage.token },
+        data: {
+          id: this.props.selectedUser._id,
+          username: this.props.selectedUser.username,
+          following: this.props.selectedUser.following,
+          followers: this.props.selectedUser.followers
+        }
       })
-      .catch(err => {
-        console.log("Error");
-      })
+        .then(res => {
+          console.log(res);
+        })
+        this.setState({
+          followed: true
+        })
+        this.hideFollowButton();
+        // .catch(err => {
+        //   console.log("Error");
+        // })
+    }
   };
+
+  // hideButton = () => {
+  //   console.log(this.props.selectedUser);
+  // for (let i = 0; i < this.props.selectedUser.following.length; i++) {
+  //     if (this.props.selectedUser.following[i].username === this.state.user.username) {
+  //       return (
+  //         <div>
+  //           Hello
+  //         </div>
+  //       )
+  //     }
+  //   }
+  // }
 
   render() {
     const { posts } = this.state;
@@ -96,7 +170,7 @@ export default class SelectedProfile extends Component {
               </Col>
               <Col md={9} className='bio'>
                 <h1>
-                  {this.props.selectedUser.username} <Button onClick={this.followUser}>Follow</Button>
+                  {this.props.selectedUser.username} <Button id="follow" onClick={this.followUser.bind(this)}>Follow</Button>
                 </h1>
                 <ul className='d-flex'>
                   <li> 20 Posts</li>
