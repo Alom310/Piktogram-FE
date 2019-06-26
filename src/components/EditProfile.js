@@ -6,11 +6,12 @@ export default class EditProfile extends Component {
 		event.preventDefault();
 		axios
 			.put(`${urls.users}${this.props.user._id}/update`, {
-				firstName : this.state.firstName,
-				lastName  : this.state.lastName,
-				email     : this.state.email,
-				username  : this.state.username,
-				password  : this.state.password
+				firstName: this.state.firstName,
+				lastName: this.state.lastName,
+				email: this.state.email,
+				username: this.state.username,
+				password: this.state.password,
+				bio: this.state.bio
 			})
 			.then(res => {
 				console.log(res);
@@ -30,6 +31,12 @@ export default class EditProfile extends Component {
 	render() {
 		return (
 			<div>
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
 				<form>
 					<input
 						name='firstName'
@@ -41,21 +48,26 @@ export default class EditProfile extends Component {
 						placeholder={this.props.user.lastName}
 						onChange={this.handleInput}
 					/>
-					<input
+					{/* <input
 						name='email'
 						placeholder={this.props.user.email}
 						onChange={this.handleInput}
-					/>
+					/> */}
 					<input
 						name='username'
 						placeholder={this.props.user.username}
 						onChange={this.handleInput}
 					/>
 					<input
+						name='bio'
+						placeholder={this.props.user.bio}
+						onChange={this.handleInput}
+					/>
+					{/* <input
 						name='password'
 						placeholder='New Password'
 						onChange={this.handleInput}
-					/>
+					/> */}
 					<button name='editProfile' onClick={this.handleEditProfile}>
 						Submit
 					</button>

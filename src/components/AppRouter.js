@@ -6,7 +6,7 @@ import SelectedProfile from './SelectedProfile';
 import Home from './Home';
 import SearchBar from './SearchBar';
 import NewPost from './NewPost';
-import Notifications from './Notifications';
+import Following from './Following';
 import Profile from './Profile';
 import '../styles/AppRouter.css';
 
@@ -36,7 +36,7 @@ function AppRouter() {
 								<Link to='/newpost/'>New Post</Link>
 							</li>
 							<li>
-								<Link to='/notifications/'>Notifications</Link>
+								<Link to='/following/'>Following</Link>
 							</li>
 							<li>
 								<Link to='/myprofile/'>Profile</Link>
@@ -48,7 +48,7 @@ function AppRouter() {
 				<Route path='/' exact component={Home} />
 				<Route path='/search/' component={SearchBar} />
 				<Route path='/newpost/' component={NewPost} />
-				<Route path='/notifications/' component={Notifications} />
+				<Route path='/following/' component={Following} />
 				<Route path='/myprofile/' component={Profile} />
 				<Route path='/profile/' component={SelectedProfile} />
 			</div>

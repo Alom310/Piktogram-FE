@@ -97,7 +97,7 @@ export default class Home extends Component {
 								</Card.Body>
 							</Card>
 						</Col>
-						<Col sm={5} xd={6} lg={4}>
+						{/* <Col sm={5} xd={6} lg={4}>
 							<h1> Stories</h1>
 							<div className='row'>
 								<div className='first_col'>
@@ -106,7 +106,7 @@ export default class Home extends Component {
 								</div>
 								<div className='second_col'>two</div>
 							</div>
-						</Col>
+						</Col> */}
 					</Row>
 				</Container>
 			</div>
