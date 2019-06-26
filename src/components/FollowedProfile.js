@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
-import axios from 'axios';
 import urls from "../urls/url-paths"
-import profile from '../styles/profile.jpeg';
+import axios from 'axios';
 import { Button, Container, Row, Col } from 'react-bootstrap';
+import profile from '../styles/profile.jpeg';
 
-export default class SelectedProfile extends Component {
+export default class FollowedProfile extends Component {
 
   state = {
-    posts: [],
     user: null,
     followed: false,
+    posts: []
   }
 
   componentWillReceiveProps() {
@@ -18,14 +18,36 @@ export default class SelectedProfile extends Component {
 
   componentDidMount = () => {
     this.fetchPosts();
-    this.getUser();
-    // this.hideButton();
+    this.fetchUsers();
   }
 
+  fetchPosts = () => {
+    fetch(urls.posts, {
+      method: "GET"
+    })
+      .then(results => results.json())
+      .then(data => this.setState({ posts: data }))
+      .catch(function (error) { console.log(error) });
+  }
+
+  fetchUsers = () => {
+    fetch(`${urls.search}${this.props.username}`, {
+      method: 'GET'
+    })
+      .then(results => results.json())
+      .then(data => {
+        this.setState({ user: data[0] });
+        this.checkFollowers();
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   checkFollowers = () => {
-    if (this.props.selectedUser) {
-      for (let i = 0; i < this.props.selectedUser.followers.length; i++) {
-        if (this.props.selectedUser.followers[i].username === this.state.user.username) {
+    if (this.state.user) {
+      for (let i = 0; i < this.state.user.followers.length; i++) {
+        if (this.state.user.followers[i].username === this.props.user.username) {
           this.setState({
             followed: true
           })
@@ -38,63 +60,13 @@ export default class SelectedProfile extends Component {
   }
 
   hideFollowButton = () => {
-    // function removeEvent(el, type, handler) {
-    //   if (el.detachEvent) el.detachEvent('on'+type, handler); else el.removeEventListener(type, handler);
-    // }
     var element = document.getElementById("follow");
     element.textContent = "Following ✓";
     element.removeEventListener('click', this.followUser);
   }
 
-  getUser = () => {
-    if (localStorage.token) {
-      axios({
-        method: 'GET',
-        url: urls.myprofile,
-        headers: { token: localStorage.token }
-      })
-        .then(response => {
-          this.setState({
-            user: response.data
-          });
-          this.checkFollowers();
-          console.log(
-            'App successfully recieves a response',
-            response
-          );
-        })
-        .catch(err => console.log(err));
-    }
-  };
-
-  // getUser = () => {
-  //   if (localStorage.token) {
-  //     axios({
-  //       method: "GET",
-  //       url: urls.profile,
-  //       headers: { token: localStorage.token }
-  //     })
-  //       .then(response => {
-  //         this.setState({
-  //           user: response.data
-  //         })
-  //         console.log('App successfully recieves a response', response)
-  //       })
-  //       .catch(err => console.log(err))
-  //   }
-  // }
-
-  fetchPosts = () => {
-    fetch(urls.posts, {
-      method: "GET"
-    })
-      .then(results => results.json())
-      .then(data => this.setState({ posts: data }))
-      .catch(function (error) { console.log(error) });
-  }
-
   _renderPosts = (post, index) => {
-    if (post.user._id === this.props.selectedUser._id) {
+    if (post.user._id === this.state.user._id) {
       let image = `${urls.images}${post.fileName}`
       return (
         <div className='col-md-4 pb-4' key={index}>
@@ -117,13 +89,13 @@ export default class SelectedProfile extends Component {
     } else {
       axios({
         method: "PUT",
-        url: `${urls.users}${this.props.selectedUser._id}/follow`,
+        url: `${urls.users}${this.state.user._id}/follow`,
         headers: { token: localStorage.token },
         data: {
-          id: this.props.selectedUser._id,
-          username: this.props.selectedUser.username,
-          following: this.props.selectedUser.following,
-          followers: this.props.selectedUser.followers
+          id: this.state.user._id,
+          username: this.state.user.username,
+          following: this.state.user.following,
+          followers: this.state.user.followers
         }
       })
         .then(res => {
@@ -133,29 +105,13 @@ export default class SelectedProfile extends Component {
         followed: true
       })
       this.hideFollowButton();
-      // .catch(err => {
-      //   console.log("Error");
-      // })
     }
   };
-
-  // hideButton = () => {
-  //   console.log(this.props.selectedUser);
-  // for (let i = 0; i < this.props.selectedUser.following.length; i++) {
-  //     if (this.props.selectedUser.following[i].username === this.state.user.username) {
-  //       return (
-  //         <div>
-  //           Hello
-  //         </div>
-  //       )
-  //     }
-  //   }
-  // }
 
   render() {
     const { posts } = this.state;
 
-    if (this.props.selectedUser) {
+    if (this.state.user) {
       return (
         <div>
           {/* <h2>Posts</h2> */}
@@ -170,7 +126,7 @@ export default class SelectedProfile extends Component {
               </Col>
               <Col md={9} className='bio'>
                 <h1>
-                  {this.props.selectedUser.username} <Button id="follow" onClick={this.followUser.bind(this)}>Follow</Button>
+                  {this.state.user.username} <Button id="follow" onClick={this.followUser.bind(this)}>Follow</Button>
                 </h1>
                 <ul className='d-flex'>
                   <li> 20 Posts</li>

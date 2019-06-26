@@ -35,3 +35,31 @@
     margin: 0 auto;
 
 }
+
+.hidden {
+    display: none;
+}
+
+.profile-image-container {
+  display: inline-block;
+  position: relative;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.profile-image {
+    width: auto;
+  height: 100%;
+  margin-left: -50px;
+}
+
+.d-flex{
+    padding-left: 0;
+}
+
+.d-flex li {
+    padding-left: 0;
+    padding-right: 10px;
+}

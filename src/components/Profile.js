@@ -4,12 +4,14 @@ import { Button, Container, Row, Col } from 'react-bootstrap';
 import '../styles/Profile.css';
 import profile from '../styles/profile.jpeg';
 import urls from "../urls/url-paths"
+import EditProfile from './EditProfile';
 
 class Profile extends Component {
 	state = {
 		user: null,
 		posts: [],
-		editProfile: false
+		editProfile: false,
+		// postCount: 0
 	};
 
 	handleSignOut = () => {
@@ -17,11 +19,11 @@ class Profile extends Component {
 		window.location.href = '/';
 	};
 
-	editPic = () => {
-		this.setState({
-			editProfile : this.state.editProfile ? false : true
-		});
-	};
+	// editPic = () => {
+	// 	this.setState({
+	// 		editProfile: this.state.editProfile ? false : true
+	// 	});
+	// };
 
 	getUser = () => {
 		if (localStorage.token) {
@@ -44,11 +46,22 @@ class Profile extends Component {
 	};
 
 	fetchPosts = () => {
+		// let count = this.state.postCount;
 		fetch(urls.posts, {
 			method: 'GET'
 		})
 			.then(results => results.json())
-			.then(data => this.setState({ posts: data }))
+			.then(data => {
+				this.setState({ posts: data })
+				// for (let i = 0; i < this.state.posts.length; i++) {
+				// 	if (this.state.posts.user._id === this.state.user._id) {
+				// 		count++
+				// 	}
+				// }
+				// this.setState({
+				// 	postCount: count
+				// })
+			})
 			.catch(function (error) {
 				console.log(error);
 			});
@@ -57,8 +70,6 @@ class Profile extends Component {
 	_renderPosts = (post, index) => {
 		if (post.user._id === this.state.user._id) {
 			let image = `${urls.images}${post.fileName}`;
-
-
 			return (
 				<div className='col-md-4 pb-4' key={index}>
 					<div className='parent_overlay'>
@@ -78,7 +89,7 @@ class Profile extends Component {
 		}
 	};
 
-	// TODO: need to fix uploading user profile image. 
+	// TODO: need to fix uploading user profile image.
 	// _renderImage = (post, index) => {
 	// 	if (post.user._id === this.state.user._id) {
 	// 		let image = `http://localhost:3001/resources/images/${post.fileName}`;
@@ -101,61 +112,74 @@ class Profile extends Component {
 	setEdit = () => {
 		this.setState({
 			editProfile: true
-    });
-    
-  };
+		});
+	};
 
-  
-  handleSignOut = () => {
-    localStorage.clear();
-    window.location.href = "/"
-  }
+
+	handleSignOut = () => {
+		localStorage.clear();
+		window.location.href = "/"
+	}
+
+	returnToProfile = () => {
+		this.setState({
+			editProfile: false
+		})
+		this.getUser();
+	}
 
 
 	render() {
 		const { posts } = this.state;
-		console.log("here's are all the posts", posts);
 
-		if (this.state.user) {
-			const buttonEdit = this.state.editProfile ? (
-				<div>
-					<input type='file' />
-					<Button onClick={this.editPic}>Cancel</Button>
-				</div>
-			) : (
-				<Button onClick={this.editPic}>Edit!</Button>
-			);
+		if (this.state.editProfile) {
+			return (
+				<EditProfile
+					returnToProfile={this.returnToProfile}
+					user={this.state.user}
+				/>
+			)
+		} else if (this.state.user) {
+			// const buttonEdit = this.state.editProfile ? (
+			// 	<div>
+			// 		<input type='file' />
+			// 		<Button onClick={this.editPic}>Cancel</Button>
+			// 	</div>
+			// ) : (
+			// 		<Button onClick={this.editPic}>Edit!</Button>
+			// 	);
 			return (
 				<div className='mw-custom'>
 					{/* <h2>Posts</h2> */}
 					<Container className='mt-5 pt-5 pb-5'>
 						<Row>
 							<Col md={3}>
-								<img
-									src={profile}
-									alt='profilePic'
-									className='rounded-circle w-100'
-								/>
+								<div className="profile-image-container">
+									<img
+										src={`${urls.images}${this.state.user.avatar}`}
+										alt='profilePic'
+										className='profile-image'
+									/>
+								</div>
 							</Col>
 							<Col md={9} className='bio'>
 								<h1>
-									{this.state.user.username}<Button>Edit Profile</Button>
+									{this.state.user.username} <Button onClick={this.setEdit}>Edit Profile</Button> <Button onClick={this.handleSignOut}>Logout</Button>
+
 								</h1>
 								<ul className='d-flex'>
-									<li> 20 Posts</li>
-									<li> 30 Followers</li>
-									<li> 20 Followings</li>
+									{/* <li>{this.state.postCount} Posts</li> */}
+									<li>{this.state.user.followers.length} Followers</li>
+									<li>{this.state.user.following.length} Following</li>
 								</ul>
 								<h1> Bio</h1>
-								Lorem ipsum dolor sit amet consectetur
-								adipisicing elit. Deserunt voluptatibus nihil
-								animi est atque delectus consequatur dolore
-								excepturi fugit adipisci?
+								<p>{this.state.user.bio}</p>
+
 							</Col>
 						</Row>
 					</Container>
 
-					<Container>
+					{/* <Container>
 						<Row className='mb-3'>
 							<Col md={2}>
 								<img
@@ -174,7 +198,7 @@ class Profile extends Component {
 								<h5 className='text-center'>Highlights</h5>
 							</Col>
 						</Row>
-					</Container>
+					</Container> */}
 
 					<Container>
 						<Row className='pt-5 pb-5'>
@@ -186,20 +210,18 @@ class Profile extends Component {
 						</Row>
 					</Container>
 
-					<Container>
+					{/* <Container>
 						<Row>
 							<Col md={12}>
 								Footer. Connect with us on social media Linkedln
 								elit. Perferendis, molestias.
 							</Col>
 						</Row>
-					</Container>
-					<Button onClick={this.handleSignOut}>Logout</Button>
+					</Container> */}
 				</div>
 			);
-		} else {
-			return null;
 		}
+		return null;
 	}
 }
 
