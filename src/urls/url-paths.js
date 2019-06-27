@@ -1,6 +1,6 @@
 let url = {};
-// url.base = "https://cors-anywhere.herokuapp.com/https://immense-spire-50040.herokuapp.com/";
-url.base = "http://localhost:3001/";
+url.base = "https://cors-anywhere.herokuapp.com/https://immense-spire-50040.herokuapp.com/";
+// url.base = "http://localhost:3001/";
 url.login = url.base + "users/login";
 url.signup = url.base + "users/signup";
 url.users = url.base + "users/";
