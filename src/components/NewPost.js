@@ -7,15 +7,15 @@ import { Form, Button } from 'react-bootstrap';
 
 export default class NewPost extends Component {
 	state = {
-		fileName    : null,
-		description : null
+		fileName: null,
+		description: null
 	};
 
 	handleChange = e => {
 		console.log(e.target.name);
 		if (e.target.name === 'image') {
 			this.setState({
-				fileName : e.target.files[0]
+				fileName: e.target.files[0]
 			});
 		} else {
 			this.setState({
@@ -30,10 +30,11 @@ export default class NewPost extends Component {
 			formData.append('description', this.state.description);
 			formData.append('image', this.state.fileName);
 			axios({
-				method  : 'POST',
-        url     : urls.create_post,
-				headers : { token: localStorage.token },
-				data    : formData
+				method: 'POST',
+				url: urls.create_post,
+				headers: { token: localStorage.token },
+				data: formData,
+				enctype: 'multipart/form-data'
 			})
 				.then(response => {
 					console.log(
@@ -52,7 +53,7 @@ export default class NewPost extends Component {
 					<Form onSubmit={this.handleFormSubmit}>
 						<Form.Group controlId="">
 							<Form.Label>Upload New Photo</Form.Label>
-							<Form.Control type='file' name='image' placeholder="Choose image" onChange={this.handleChange} />
+							<Form.Control type='file' id='image' name='image' accept='image/*' required placeholder="Choose image" onChange={this.handleChange} />
 						</Form.Group>
 
 						<Form.Group controlId="">
@@ -61,7 +62,7 @@ export default class NewPost extends Component {
 								onChange={this.handleChange}
 								type='text'
 								name='description'
-								placeholder ='description'
+								placeholder='description'
 							/>
 						</Form.Group>
 						<input type='submit' value='Submit' />

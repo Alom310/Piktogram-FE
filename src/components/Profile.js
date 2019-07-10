@@ -169,8 +169,8 @@ class Profile extends Component {
 								</h1>
 								<ul className='d-flex'>
 									{/* <li>{this.state.postCount} Posts</li> */}
-									<li>{this.state.user.followers.length} Followers</li>
-									<li>{this.state.user.following.length} Following</li>
+									{/* <li>{this.state.user.followers.length} Followers</li>
+									<li>{this.state.user.following.length} Following</li> */}
 								</ul>
 								<h1> Bio</h1>
 								<p>{this.state.user.bio}</p>
