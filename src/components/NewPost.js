@@ -42,6 +42,7 @@ export default class NewPost extends Component {
 						'App successfully recieves a response',
 						response
 					);
+					window.location.href = 'https://powerful-temple-57466.herokuapp.com';
 				})
 				.catch(err => console.log(err));
 		}
