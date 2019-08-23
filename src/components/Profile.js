@@ -69,7 +69,7 @@ class Profile extends Component {
 
 	_renderPosts = (post, index) => {
 		if (post.user._id === this.state.user._id) {
-			let image = `${urls.images}${post.fileName}`;
+			let image = `${post.fileName}`;
 			return (
 				<div className='col-md-4 pb-4' key={index}>
 					<div className='parent_overlay'>
@@ -92,7 +92,7 @@ class Profile extends Component {
 	// TODO: need to fix uploading user profile image.
 	// _renderImage = (post, index) => {
 	// 	if (post.user._id === this.state.user._id) {
-	// 		let image = `http://localhost:3001/resources/images/${post.fileName}`;
+	// 		let image = `://localhost:3001/resources/images/${post.fileName}`;
 
 	// 		return (
 	// 			<div className='col-md-4 pb-4' key={index}>
