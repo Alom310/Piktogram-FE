@@ -24,7 +24,8 @@ export default class NewPost extends Component {
 		}
 	};
 
-	handleFormSubmit = () => {
+	handleFormSubmit = (e) => {
+		e.preventDefault();
 		if (localStorage.token) {
 			let formData = new FormData();
 			formData.append('description', this.state.description);
