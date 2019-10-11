@@ -13,3 +13,7 @@
     padding-left: 20px;
     padding-top: 3px;
 }
+
+#logoImg {
+    max-width: 80px;
+}

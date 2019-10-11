@@ -8,52 +8,104 @@ import SearchBar from './SearchBar';
 import NewPost from './NewPost';
 import Following from './Following';
 import Profile from './Profile';
+import SignInForm from './SignInForm';
+import SignUpForm from './SignUpForm';
 import '../styles/AppRouter.css';
 
-function AppRouter() {
-	return (
-		<Router>
-			<div>
-				<header className='d-flex flex-row justify-content-between'>
-					<div className='d-flex nav_bar '>
-						<img
-							id='logoImg'
-							src={logo}
-							className='mr-1'
-							alt='logo'
-						/>
-						<h3>Piktogram</h3>
-					</div>
-					<nav>
-						<ul className='d-flex flex-row justify-content-around nav-ul'>
-							<li>
-								<Link to='/'>Home</Link>
-							</li>
-							<li>
-								<Link to='/search/'>Search</Link>
-							</li>
-							<li>
-								<Link to='/newpost/'>New Post</Link>
-							</li>
-							<li>
-								<Link to='/following/'>Following</Link>
-							</li>
-							<li>
-								<Link to='/myprofile/'>Profile</Link>
-							</li>
-						</ul>
-					</nav>
-				</header>
+function AppRouter(props) {
 
-				<Route path='/' exact component={Home} />
-				<Route path='/search/' component={SearchBar} />
-				<Route path='/newpost/' component={NewPost} />
-				<Route path='/following/' component={Following} />
-				<Route path='/myprofile/' component={Profile} />
-				<Route path='/profile/' component={SelectedProfile} />
-			</div>
-		</Router>
-	);
+	if (props.isSignedIn) {
+		return (
+			<Router>
+				<div>
+					<header className='d-flex flex-row justify-content-between'>
+						<div className='d-flex nav_bar '>
+							<img
+								id='logoImg'
+								src={logo}
+								className='mr-1'
+								alt='logo'
+							/>
+							<h3>Piktogram</h3>
+						</div>
+						<nav>
+							<ul className='d-flex flex-row justify-content-around nav-ul'>
+								<li>
+									<Link to='/'>Home</Link>
+								</li>
+								<li>
+									<Link to='/search/'>Search</Link>
+								</li>
+								<li>
+									<Link to='/newpost/'>New Post</Link>
+								</li>
+								<li>
+									<Link to='/following/'>Following</Link>
+								</li>
+								<li>
+									<Link to='/myprofile/'>Profile</Link>
+								</li>
+							</ul>
+						</nav>
+					</header>
+
+					<Route path='/' exact component={Home} />
+					<Route path='/search/' component={SearchBar} />
+					<Route path='/newpost/' component={NewPost} />
+					<Route path='/following/' component={Following} />
+					<Route path='/myprofile/' component={Profile} />
+					<Route path='/profile/' component={SelectedProfile} />
+				</div>
+			</Router>
+		);
+	} else {
+		return (
+			<Router>
+				<div>
+					<header className='d-flex flex-row justify-content-between'>
+						<div className='d-flex nav_bar '>
+							<img
+								id='logoImg'
+								src={logo}
+								className='mr-1'
+								alt='logo'
+							/>
+							<h3>Piktogram</h3>
+						</div>
+						<nav>
+							<ul className='d-flex flex-row justify-content-around nav-ul'>
+								<li>
+									<Link to='/'>Home</Link>
+								</li>
+								<li>
+									<Link to='/search/'>Search</Link>
+								</li>
+								<li>
+									<Link to='/signin/'>Sign In</Link>
+								</li>
+								<li>
+									<Link to='/signup/'>Sign Up</Link>
+								</li>
+							</ul>
+						</nav>
+					</header>
+
+					<Route path='/' exact component={Home} />
+					<Route path='/search/' component={SearchBar} />
+					<Route path='/signin' component={() => <SignInForm
+						signedIn={props.signedIn}
+						onSignUp={props.onSignUp}
+					/>}
+					/>
+					<Route path='/signup/' component={() => <SignUpForm
+						signedIn={props.signedIn}
+						onSignIn={props.onSignIn}
+					/>}
+					/>
+				</div>
+			</Router>
+		);
+	}
 }
 
 export default AppRouter;

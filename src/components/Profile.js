@@ -5,6 +5,7 @@ import '../styles/Profile.css';
 import profile from '../styles/profile.jpeg';
 import urls from "../urls/url-paths"
 import EditProfile from './EditProfile';
+import RegisterPrompt from './RegisterPrompt';
 
 class Profile extends Component {
 	state = {
@@ -140,14 +141,6 @@ class Profile extends Component {
 				/>
 			)
 		} else if (this.state.user) {
-			// const buttonEdit = this.state.editProfile ? (
-			// 	<div>
-			// 		<input type='file' />
-			// 		<Button onClick={this.editPic}>Cancel</Button>
-			// 	</div>
-			// ) : (
-			// 		<Button onClick={this.editPic}>Edit!</Button>
-			// 	);
 			return (
 				<div className='mw-custom'>
 					{/* <h2>Posts</h2> */}
@@ -165,12 +158,8 @@ class Profile extends Component {
 							<Col md={9} className='bio'>
 								<h1>
 									{this.state.user.username} <Button onClick={this.setEdit}>Edit Profile</Button> <Button onClick={this.handleSignOut}>Logout</Button>
-
 								</h1>
 								<ul className='d-flex'>
-									{/* <li>{this.state.postCount} Posts</li> */}
-									{/* <li>{this.state.user.followers.length} Followers</li>
-									<li>{this.state.user.following.length} Following</li> */}
 								</ul>
 								<h1> Bio</h1>
 								<p>{this.state.user.bio}</p>
@@ -178,27 +167,6 @@ class Profile extends Component {
 							</Col>
 						</Row>
 					</Container>
-
-					{/* <Container>
-						<Row className='mb-3'>
-							<Col md={2}>
-								<img
-									src={profile}
-									alt='profilePic'
-									className='rounded-circle w-100'
-								/>
-								<h5 className='text-center'>Highlights</h5>
-							</Col>
-							<Col md={2}>
-								<img
-									src={profile}
-									alt='profilePic'
-									className='rounded-circle w-100'
-								/>
-								<h5 className='text-center'>Highlights</h5>
-							</Col>
-						</Row>
-					</Container> */}
 
 					<Container>
 						<Row className='pt-5 pb-5'>
@@ -209,19 +177,11 @@ class Profile extends Component {
 								)}
 						</Row>
 					</Container>
-
-					{/* <Container>
-						<Row>
-							<Col md={12}>
-								Footer. Connect with us on social media Linkedln
-								elit. Perferendis, molestias.
-							</Col>
-						</Row>
-					</Container> */}
 				</div>
 			);
+		} else {
+			return null;
 		}
-		return null;
 	}
 }
 

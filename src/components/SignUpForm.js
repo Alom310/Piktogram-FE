@@ -7,61 +7,61 @@ import flower from "../styles/flower.jpg";
 import logo from "../styles/piktogram.png"
 export default class SignUpForm extends Component {
 
-	state = {
-		firstName: null,
-		lastName: null,
-		email: null,
-		username: null,
-		password: null,
-		avatar: null,
-		bio: null
-	}
+  state = {
+    firstName: null,
+    lastName: null,
+    email: null,
+    username: null,
+    password: null,
+    avatar: null,
+    bio: null
+  }
 
-	handleInput = event => {
-		if (event.target.name === "image") {
-			this.setState({
-				avatar: event.target.files[0]
-			})
-		} else {
-			this.setState({
-				[event.target.name]: event.target.value,
-			});
-		}
-	};
+  handleInput = event => {
+    if (event.target.name === "image") {
+      this.setState({
+        avatar: event.target.files[0]
+      })
+    } else {
+      this.setState({
+        [event.target.name]: event.target.value,
+      });
+    }
+  };
 
-	handleSignUp = event => {
-		event.preventDefault();
+  handleSignUp = event => {
+    event.preventDefault();
 
-		let formData = new FormData();
-		formData.append("image", this.state.avatar);
-		formData.append("firstName", this.state.firstName);
-		formData.append("lastName", this.state.lastName);
-		formData.append("email", this.state.email);
-		formData.append("username", this.state.username);
-		formData.append("password", this.state.password);
-		formData.append("bio", this.state.bio);
-		axios({
-			method: "POST",
+    let formData = new FormData();
+    formData.append("image", this.state.avatar);
+    formData.append("firstName", this.state.firstName);
+    formData.append("lastName", this.state.lastName);
+    formData.append("email", this.state.email);
+    formData.append("username", this.state.username);
+    formData.append("password", this.state.password);
+    formData.append("bio", this.state.bio);
+    axios({
+      method: "POST",
       url: urls.signup,
-			headers: { token: localStorage.token },
-			data: formData
-		})
-			.then(response => {
-				localStorage.token = response.data.signedJwt;
-				this.props.signedIn();
-			})
-			.catch(err => console.log(err));
-	};
+      headers: { token: localStorage.token },
+      data: formData
+    })
+      .then(response => {
+        localStorage.token = response.data.signedJwt;
+        this.props.signedIn();
+      })
+      .catch(err => console.log(err));
+  };
 
-	render() {
-		return (
+  render() {
+    return (
       <div className="signUpPage">
         <div className="d-flex flex-row justify-content-center">
           <img id='titleImg' src={logo} className='mr-1' alt='logo' />
           <h1 className="Title">Piktogram</h1>
         </div>
         <div className="d-flex flex-row justify-content-center">
-          <div> 
+          <div>
             <img className="signUpImage" src={flower} />
           </div>
 
@@ -146,18 +146,12 @@ export default class SignUpForm extends Component {
                     Submit
                   </Button>
                 </div>
-
               </Form>
-
-            </div>
-
-            <div className="text-center">
-              Already have an account?<p className="link" onClick={this.props.onSignIn}> Sign In</p>
             </div>
           </div>
         </div>
 
-			</div>
-		)
-	}
+      </div>
+    )
+  }
 }

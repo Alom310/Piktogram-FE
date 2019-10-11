@@ -41,7 +41,7 @@ export default class SignInForm extends Component {
 					<h1 className="Title">Piktogram</h1>
 				</div>
 				<div className="d-flex flex-row justify-content-center">
-					<div> 
+					<div>
 						<img className="signInImage" src={spices} />
 					</div>
 
@@ -80,11 +80,6 @@ export default class SignInForm extends Component {
 										</Button>
 									</div>
 								</Form.Group>
-
-								<div className='text-center'>
-									<p>Don't have an account?</p>
-									<p className="link" onClick={this.props.onSignUp}>SignUp</p>
-								</div>
 							</Form>
 						</div>
 					</div>
