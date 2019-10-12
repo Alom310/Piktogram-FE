@@ -3,6 +3,7 @@ import axios from 'axios';
 import urls from "../urls/url-paths"
 import profile from '../styles/profile.jpeg';
 import { Button, Container, Row, Col } from 'react-bootstrap';
+import RegisterPrompt from './RegisterPrompt';
 
 export default class SelectedProfile extends Component {
 
@@ -10,6 +11,13 @@ export default class SelectedProfile extends Component {
     posts: [],
     user: null,
     followed: false,
+    displayRegistrationError: false
+  }
+
+  handleClose = event => {
+    this.setState({
+      displayRegistrationError: false
+    })
   }
 
   componentWillReceiveProps() {
@@ -112,7 +120,11 @@ export default class SelectedProfile extends Component {
   }
 
   followUser = () => {
-    if (this.state.followed) {
+    if (!localStorage.token) {
+      this.setState({
+        displayRegistrationError: true
+      })
+    } else if (this.state.followed) {
       return null;
     } else {
       axios({
@@ -155,7 +167,13 @@ export default class SelectedProfile extends Component {
   render() {
     const { posts } = this.state;
 
-    if (this.props.selectedUser) {
+    if (this.state.displayRegistrationError) {
+      return (
+        <RegisterPrompt
+          handleClose={this.handleClose}
+        />
+      );
+    } else if (this.props.selectedUser) {
       return (
         <div>
           {/* <h2>Posts</h2> */}

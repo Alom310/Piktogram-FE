@@ -1,7 +1,6 @@
 .home-section {
-    padding-top: 60px;
+    padding-top: 20px;
     background-color: #fafafa;
-
 }
 
 .card-picture {
@@ -13,24 +12,26 @@
 }
 
 .username {
-    text-align: center;
-    padding-top: 2rem;
+    font-size: 24px;
 }
 
 .submit_button {
     margin-left: 10px;
 }
 
-.first_col {
+.card {
     width: 100%;
-    background-color: #fefefe;
-    height: 300px;
-    margin-bottom: 10px;
 }
 
-.second_col {
-    width: 100%;
-    background-color: #fefefe;
-    height: 300px;
+.commentForm {
+    padding-top: 20px;
+}
 
+.post-description {
+    font-size: 18px;
+}
+
+img.card-img-top {
+    padding-top: 10px;
+    padding-bottom: 20px;
 }

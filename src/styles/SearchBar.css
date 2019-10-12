@@ -1,3 +1,5 @@
-.search-user {
-    margin-top: 4rem;
+@media (max-width: 900px) {
+    .search-bar {
+        width: 94%;
+    }
 }

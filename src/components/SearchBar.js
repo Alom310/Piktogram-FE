@@ -6,20 +6,20 @@ import urls from "../urls/url-paths"
 
 export default class SearchBar extends Component {
 	state = {
-		query         : null,
-		users         : [],
-		selectedUser  : null,
-		renderProfile : false
+		query: null,
+		users: [],
+		selectedUser: null,
+		renderProfile: false
 	};
 
 	fetchUsers = e => {
 		e.preventDefault();
 		fetch(`${urls.search}${this.state.query}`, {
-			method : 'GET'
+			method: 'GET'
 		})
 			.then(results => results.json())
 			.then(data => this.setState({ users: data }))
-			.catch(function(error) {
+			.catch(function (error) {
 				console.log(error);
 			});
 	};
@@ -48,16 +48,16 @@ export default class SearchBar extends Component {
 
 	handleClick(user) {
 		this.setState({
-			selectedUser  : user,
-			renderProfile : true
+			selectedUser: user,
+			renderProfile: true
 		});
 	}
 
 	clearProfile = () => {
 		this.setState({
-			renderProfile : false,
-			query         : null,
-			users         : []
+			renderProfile: false,
+			query: null,
+			users: []
 		});
 	};
 
@@ -79,11 +79,10 @@ export default class SearchBar extends Component {
 					<input
 						name='query'
 						className='search-bar'
-						placeholder='Search...'
+						placeholder='Search profiles...'
 						onChange={this.handleInput}
 					/>
 				</form>
-				<h2>Users</h2>
 				{users ? users.map(this._renderUsers) : 'No users...'}
 			</div>
 		);

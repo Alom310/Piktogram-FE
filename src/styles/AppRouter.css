@@ -1,4 +1,5 @@
 .nav-ul {
+    list-style: none;
     margin-bottom: 1rem;
     padding-right: 4rem;
     margin-top: 14px;
@@ -14,6 +15,26 @@
     padding-top: 3px;
 }
 
+h3 {
+    padding-top: 20px;
+}
+
 #logoImg {
-    max-width: 80px;
+    max-width: 60px;
+}
+
+nav.navbar {
+    background-color: #ffffff !important;
+    padding-left: 100px;
+}
+
+a.nav-link {
+    color: #000000 !important;
+    padding-left: 40px;
+}
+
+@media (max-width: 900px) {
+    nav.navbar {
+        padding-left: 20px;
+    }
 }

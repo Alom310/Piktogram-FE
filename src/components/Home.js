@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { Card, Container, Row, Col, Form, Button, ListGroup } from 'react-bootstrap';
 import RegisterPrompt from './RegisterPrompt';
 import SignInForm from './SignInForm';
 import '../styles/Home.css';
@@ -55,12 +55,6 @@ export default class Home extends Component {
 		});
 	};
 
-	handleClose = event => {
-		this.setState({
-			displayRegistrationError: false
-		})
-	}
-
 	signedOut = () => {
 		this.setState({
 			isSignedIn: false
@@ -77,7 +71,7 @@ export default class Home extends Component {
 		// let image = `https://cors-anywhere.herokuapp.com/https://immense-spire-50040.herokuapp.com/resources/images/${post.fileName}`
 		let comments = [];
 		for (let i = 0; i < post.comments.length; i++) {
-			comments.push(<Card.Text key={i}>{post.comments[i].content} - <i>{post.comments[i].username}</i></Card.Text>);
+			comments.push(<ListGroup.Item key={i}>{post.comments[i].content} - <i>{post.comments[i].username}</i></ListGroup.Item>);
 		}
 		return (
 			<div key={index} className='home-section'>
@@ -85,15 +79,14 @@ export default class Home extends Component {
 					<Row>
 						<Col sm={7} md={6} lg={8}>
 							<Card className='card-picture'>
-								<Card.Title>{post.user.username}</Card.Title>
-
 								<Card.Body>
+									<Card.Title><p className="username">{post.user.username}</p></Card.Title>
 									<Card.Img
 										variant='top'
 										src={image}
 										alt='personal'
 									/>
-									<Card.Text><b>{post.description}</b></Card.Text>
+									<Card.Text><b className="post-description">{post.description}</b></Card.Text>
 									{comments}
 									<Form
 										className='commentForm'

@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { Nav, Navbar, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
 import logo from '../styles/piktogram.png';
 
 import SelectedProfile from './SelectedProfile';
@@ -18,36 +19,27 @@ function AppRouter(props) {
 		return (
 			<Router>
 				<div>
-					<header className='d-flex flex-row justify-content-between'>
-						<div className='d-flex nav_bar '>
+					<Navbar bg="light" expand="lg">
+						<Navbar.Brand href="#home">
 							<img
 								id='logoImg'
 								src={logo}
 								className='mr-1'
 								alt='logo'
 							/>
-							<h3>Piktogram</h3>
-						</div>
-						<nav>
-							<ul className='d-flex flex-row justify-content-around nav-ul'>
-								<li>
-									<Link to='/'>Home</Link>
-								</li>
-								<li>
-									<Link to='/search/'>Search</Link>
-								</li>
-								<li>
-									<Link to='/newpost/'>New Post</Link>
-								</li>
-								<li>
-									<Link to='/following/'>Following</Link>
-								</li>
-								<li>
-									<Link to='/myprofile/'>Profile</Link>
-								</li>
-							</ul>
-						</nav>
-					</header>
+							Piktogram
+							</Navbar.Brand>
+						<Navbar.Toggle aria-controls="basic-navbar-nav" />
+						<Navbar.Collapse id="basic-navbar-nav">
+							<Nav className="mr-auto">
+								<Nav.Link href='/'>Home</Nav.Link>
+								<Nav.Link href='/search/'>Search</Nav.Link>
+								<Nav.Link href='/newpost/'>New Post</Nav.Link>
+								<Nav.Link href='/following/'>Following</Nav.Link>
+								<Nav.Link href='/myprofile/'>Profile</Nav.Link>
+							</Nav>
+						</Navbar.Collapse>
+					</Navbar>
 
 					<Route path='/' exact component={Home} />
 					<Route path='/search/' component={SearchBar} />
@@ -62,33 +54,26 @@ function AppRouter(props) {
 		return (
 			<Router>
 				<div>
-					<header className='d-flex flex-row justify-content-between'>
-						<div className='d-flex nav_bar '>
+					<Navbar bg="light" expand="lg">
+						<Navbar.Brand href="#home">
 							<img
 								id='logoImg'
 								src={logo}
 								className='mr-1'
 								alt='logo'
 							/>
-							<h3>Piktogram</h3>
-						</div>
-						<nav>
-							<ul className='d-flex flex-row justify-content-around nav-ul'>
-								<li>
-									<Link to='/'>Home</Link>
-								</li>
-								<li>
-									<Link to='/search/'>Search</Link>
-								</li>
-								<li>
-									<Link to='/signin/'>Sign In</Link>
-								</li>
-								<li>
-									<Link to='/signup/'>Sign Up</Link>
-								</li>
-							</ul>
-						</nav>
-					</header>
+							Piktogram
+							</Navbar.Brand>
+						<Navbar.Toggle aria-controls="basic-navbar-nav" />
+						<Navbar.Collapse id="basic-navbar-nav">
+							<Nav className="mr-auto">
+								<Nav.Link href='/'>Home</Nav.Link>
+								<Nav.Link href='/search/'>Search</Nav.Link>
+								<Nav.Link href='/signin/'>Sign In</Nav.Link>
+								<Nav.Link href='/signup/'>Sign Up</Nav.Link>
+							</Nav>
+						</Navbar.Collapse>
+					</Navbar>
 
 					<Route path='/' exact component={Home} />
 					<Route path='/search/' component={SearchBar} />
