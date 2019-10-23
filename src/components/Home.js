@@ -66,9 +66,9 @@ export default class Home extends Component {
 	}
 
 	_renderPosts = (post, index) => {
-		let image = `http://localhost:3001/resources/images/${post.fileName}`;
+		// let image = `http://localhost:3001/resources/images/${post.fileName}`;
 		// let image = post.fileName;
-		// let image = `https://cors-anywhere.herokuapp.com/https://immense-spire-50040.herokuapp.com/resources/images/${post.fileName}`
+		let image = `https://cors-anywhere.herokuapp.com/https://immense-spire-50040.herokuapp.com/resources/images/${post.fileName}`
 		let comments = [];
 		for (let i = 0; i < post.comments.length; i++) {
 			comments.push(<ListGroup.Item key={i}>{post.comments[i].content} - <i>{post.comments[i].username}</i></ListGroup.Item>);

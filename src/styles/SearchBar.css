@@ -1,5 +1,10 @@
+body {
+    background-color: #f2f2f2;
+}
+
 @media (max-width: 900px) {
     .search-bar {
-        width: 94%;
+        border-top: 1px #f2f2f2 solid;
+        width: 100%;
     }
 }

@@ -64,7 +64,7 @@ export default class NewPost extends Component {
 								onChange={this.handleChange}
 								type='text'
 								name='description'
-								placeholder='description'
+								placeholder='Description'
 							/>
 						</Form.Group>
 						<input type='submit' value='Submit' />
