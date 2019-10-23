@@ -4,6 +4,9 @@
 
 ![front page](../master/front_page.png)
 
+## View the finished project here: https://powerful-temple-57466.herokuapp.com/
+## Link to backend repo here: https://github.com/Alom310/Piktogram-BE
+
 ## Overview
 - Piktogram is picture sharing social media app that is similar to Instagram.
 
